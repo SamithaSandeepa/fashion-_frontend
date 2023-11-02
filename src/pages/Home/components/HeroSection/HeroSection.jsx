@@ -6,9 +6,9 @@ export const HeroSection = () => {
   return (
     <>
       <div className="hero-heading-container">
-        <h1 className="hero-title">Our Bestsellers</h1>
+        <h1 className="hero-title">Fashion's Finest</h1>
         <h2 className="hero-subtitle">
-          Discover the Heroic Sneaker Line that Transcends Boundaries
+          Dive into Our Curated Collection of Trendsetting Elegance
         </h2>
       </div>
     </>

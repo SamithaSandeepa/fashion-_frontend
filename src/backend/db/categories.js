@@ -13,9 +13,9 @@ export const categories = [
     img: "/assets/images/category-images/hero-image-women-1.png",
   },
 
-  {
-    _id: "c",
-    categoryName: "Kid",
-    img: "/assets/images/category-images/hero-image-kids-1.png",
-  },
+  // {
+  //   _id: "c",
+  //   categoryName: "Kid",
+  //   img: "/assets/images/category-images/hero-image-kids-1.png",
+  // },
 ];

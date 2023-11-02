@@ -135,7 +135,7 @@ input:focus {
   cursor: pointer;
 }
 .cart-count {
-  font-size: .7rem;
+  font-size: 0.7rem;
   position: relative;
   display: inline-block;
   padding: 2.5px 6px;
@@ -154,6 +154,40 @@ input:focus {
 }
 .nav-logo-home-button .brand-name {
   display: none;
+}
+
+.hidden {
+  display: none;
+}
+
+.image-upload-icon {
+  cursor: pointer;
+  margin-right: 10px;
+}
+
+.uploaded-image-section {
+  margin-top: 16px;
+}
+
+.uploaded-image-section img {
+  width: 128px;
+  height: 128px;
+  object-fit: cover;
+  border-radius: 4px;
+}
+
+.uploaded-image-section button {
+  margin-left: 8px;
+  background-color: transparent;
+  border: none;
+}
+
+.image-remove-icon {
+  color: #ff4500;
+}
+
+.image-remove-icon:hover {
+  color: #ff6347;
 }
 
 @media (min-width: 768px) {

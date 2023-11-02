@@ -5,7 +5,7 @@ import { NavLink, useNavigate } from "react-router-dom";
 import { useState } from "react";
 import { RxHamburgerMenu } from "react-icons/rx";
 import { RxCross2 } from "react-icons/rx";
-import { GrSearch } from "react-icons/gr";
+import { GrSearch, GrCamera } from "react-icons/gr";
 import { useData } from "../../contexts/DataProvider";
 import { useAuth } from "../../contexts/AuthProvider";
 import { CgShoppingCart } from "react-icons/cg";
@@ -18,6 +18,25 @@ export const Header = () => {
   const navigate = useNavigate();
   const { userDataState } = useUserData();
   const [showHamburger, setShowHamburger] = useState(true);
+  const [uploadedImage, setUploadedImage] = useState(null);
+
+  const handleImageUpload = (e) => {
+    const file = e.target.files[0];
+    if (file) {
+      const reader = new FileReader();
+      reader.onloadend = () => {
+        setUploadedImage(reader.result);
+      };
+      reader.readAsDataURL(file);
+      // Implement the classification code here if needed
+    }
+  };
+
+  const handleRemoveImage = () => {
+    setUploadedImage(null);
+    // Reset any additional classification results or state here
+  };
+
   const getActiveStyle = ({ isActive }) => {
     return { color: isActive ? "white" : "" };
   };
@@ -41,7 +60,7 @@ export const Header = () => {
       <div className="nav-logo-home-button">
         <NavLink style={getActiveStyle} to="/">
           <SiTaichilang />
-          <span className="brand-name">DadSneakers</span>
+          <span className="brand-name">BASH</span>
         </NavLink>
       </div>
 
@@ -55,10 +74,33 @@ export const Header = () => {
           }}
           placeholder="Search"
         />
+        <input
+          type="file"
+          id="imageUpload"
+          accept="image/*"
+          className="hidden"
+          onChange={handleImageUpload}
+        />
+
         <button>
-          <GrSearch />
+          <GrSearch size={16} />
         </button>
+        <label htmlFor="imageUpload" className="image-upload-icon">
+          <GrCamera size={16} />
+        </label>
       </div>
+
+      {uploadedImage && (
+        <div className="uploaded-image-section">
+          <div>
+            <img src={uploadedImage} alt="Uploaded Preview" />
+            <button onClick={handleRemoveImage} className="image-remove-icon">
+              {/* Replace with close icon of your choice */}x
+            </button>
+          </div>
+          {/* Add a placeholder for classification result if needed */}
+        </div>
+      )}
 
       <div
         className={
