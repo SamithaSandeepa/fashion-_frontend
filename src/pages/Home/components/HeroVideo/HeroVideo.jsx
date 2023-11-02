@@ -12,7 +12,7 @@ export const HeroVideo = () => {
         <img
           src="https://promoalltest-blog.cdnpromo.com/wp-content/uploads/2018/09/Blog_-6-Fashion-Brands-Using-Video-Marketing-Effectively.jpg"
           alt="Fallback"
-          style={{ width: "100%", height: "100%" }}
+          style={{ width: "100%"}}
         />
         {/* <ReactPlayer
           // url={`${process.env.PUBLIC_URL}/assets/videos/video-3.mp4`}
