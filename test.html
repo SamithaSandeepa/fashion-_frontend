@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Image Upload and Object Detection</title>
+    <style>
+      /* Define styles for the container */
+      .container {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        margin-top: 50px;
+      }
+
+      /* Define styles for the image display */
+      .image-container {
+        position: relative;
+        display: inline-block;
+        margin-bottom: 20px;
+      }
+
+      /* Define styles for the bounding box */
+      .bounding-box {
+        position: absolute;
+        border: 2px solid red;
+        box-sizing: border-box;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <!-- Image upload form -->
+      <form id="uploadForm" enctype="multipart/form-data">
+        <input type="file" id="imageInput" name="image" accept="image/*" />
+        <button type="submit">Upload and Detect</button>
+      </form>
+
+      <!-- Image display with bounding box -->
+      <div class="image-container">
+        <img id="image" src="" alt="Object with bounding box" />
+        <div class="bounding-box" id="boundingBox"></div>
+      </div>
+    </div>
+
+    <script>
+      // Function to display the bounding box
+      function displayBoundingBox(boxes) {
+        const boundingBox = document.getElementById("boundingBox");
+        const image = document.getElementById("image");
+
+        // Set the image source
+        image.src = URL.createObjectURL(
+          document.getElementById("imageInput").files[0]
+        );
+
+        // Assuming there's only one bounding box in the response
+        const [x1, y1, x2, y2] = boxes[0];
+
+        // Set the position and size of the bounding box
+        boundingBox.style.left = `${x1}px`;
+        boundingBox.style.top = `${y1}px`;
+        boundingBox.style.width = `${x2 - x1}px`;
+        boundingBox.style.height = `${y2 - y1}px`;
+
+        // Show the bounding box
+        boundingBox.style.display = "block";
+      }
+
+      // Function to handle form submission
+      document
+        .getElementById("uploadForm")
+        .addEventListener("submit", function (event) {
+          event.preventDefault();
+
+          // Create FormData object to send the image
+          const formData = new FormData();
+          formData.append(
+            "image",
+            document.getElementById("imageInput").files[0]
+          );
+
+          // Fetch data from the API
+          fetch("http://localhost:8000/api/search/detect/", {
+            method: "POST",
+            body: formData,
+          })
+            .then((response) => response.json())
+            .then((data) => {
+              // Display bounding box
+              displayBoundingBox(data.boxes);
+            })
+            .catch((error) => {
+              console.error("Error fetching data:", error);
+            });
+        });
+    </script>
+  </body>
+</html>

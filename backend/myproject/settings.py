@@ -43,6 +43,7 @@ INSTALLED_APPS = [
     'myapp',
     'prediction',
     'image_processing',
+    "imagesearch",
 ]
 
 MIDDLEWARE = [
