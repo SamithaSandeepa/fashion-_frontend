@@ -19,6 +19,7 @@ import {AdminDashboard} from "../pages/Admin/AdminDashboard";
 import { CustomerSentiment } from "../pages/Admin/CustomerSentiment/CustomerSentiments";
 import {ProductReview} from "../pages/Admin/CustomerSentiment/ProductReview";
 import { Reviewsexplain } from "../pages/Admin/CustomerSentiment/Reviewsexplain";
+import ImageSearch from "../pages/ImageSearch/ImageSearch";
 
 export const NavRoutes = () => {
   return (
@@ -79,6 +80,9 @@ export const NavRoutes = () => {
 
 
      
+
+      {/* image search */}
+      <Route path="/image-search" element={<ImageSearch />} />
     </Routes>
   );
 };
