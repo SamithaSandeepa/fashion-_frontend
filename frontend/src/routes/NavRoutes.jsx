@@ -15,6 +15,10 @@ import { Profile } from "../pages/UserProfile/Profile/Profile";
 import { Addresses } from "../pages/UserProfile/Addresses/Addresses";
 import { Orders } from "../pages/UserProfile/Orders/Orders";
 import { PageNotFound } from "../pages/PageNotFound/PageNotFound";
+import {AdminDashboard} from "../pages/Admin/AdminDashboard";
+import { CustomerSentiment } from "../pages/Admin/CustomerSentiment/CustomerSentiments";
+import {ProductReview} from "../pages/Admin/CustomerSentiment/ProductReview";
+import { Reviewsexplain } from "../pages/Admin/CustomerSentiment/Reviewsexplain";
 
 export const NavRoutes = () => {
   return (
@@ -62,6 +66,19 @@ export const NavRoutes = () => {
         <Route path="/profile/orders" element={<Orders />} />
         <Route path="/profile/addresses" element={<Addresses />} />
       </Route>
+      {/* admin path */}
+      <Route path="/admin" element={<AdminDashboard/>} />
+      <Route path="/sentiment-analysis" element={<CustomerSentiment/>} />
+      <Route path="/product-review/:id" element={<ProductReview />} />
+      <Route path="/negative-reviews/:productId" element={<Reviewsexplain />} />
+      <Route path="/positive-reviews/:productId" element={<Reviewsexplain />} />
+      <Route path="/neutral-reviews/:productId" element={<Reviewsexplain />} />
+      <Route path="/slightly-positive-reviews/:productId" element={<Reviewsexplain />} />
+      <Route path="/slightly-negative-reviews/:productId" element={<Reviewsexplain />} />
+
+
+
+     
     </Routes>
   );
 };
