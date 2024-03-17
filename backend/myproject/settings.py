@@ -48,6 +48,7 @@ INSTALLED_APPS = [
     # "sentiment",
     'sentiment.apps.SentimentConfig',
     "store",
+    "recommendation",
 ]
 
 MIDDLEWARE = [
