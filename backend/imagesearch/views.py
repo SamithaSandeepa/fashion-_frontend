@@ -38,7 +38,7 @@ CLASS_NAMES = {
 
 # Load the YOLO model
 def load_model():
-    model_path = 'D:\\Work\\sliit\\Research application\\Project Frontend\\fashion_store\\backend\\imagesearch\\models\\bestv1.pt'
+    model_path = os.path.join(settings.BASE_DIR, 'imagesearch', 'models', 'bestv1.pt')
     model = YOLO(model_path)
     return model
 
