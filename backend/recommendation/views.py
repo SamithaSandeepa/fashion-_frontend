@@ -1,46 +1,34 @@
-from django.http import JsonResponse
-from django.views.decorators.csrf import csrf_exempt
-from .models import load_your_model, load_your_encoder  # Assuming you have these functions
-import json
+# from django.views import View
+# from django.http import JsonResponse
+# import pandas as pd
+# import pickle
+# import os
+# from rest_framework.views import APIView
+# from rest_framework.parsers import JSONParser
 
-# Load your model and encoder
-model = load_your_model()
-encoder = load_your_encoder()
+# class PredictPersonalityView(APIView):
+#     parser_classes = [JSONParser]
 
-@csrf_exempt
-def predict_personality(request):
-    if request.method == 'POST':
-        try:
-            data = json.loads(request.body)
-            
-            # Extract features from the request
-            features = [
-                data.get('Gender'),
-                data.get('Age Category'),
-                data.get('Location'),
-                data.get('Hobby'),
-                data.get('Favorite Color'),
-                data.get('Sport')
-            ]
-            
-            # Encode your features here. Adjust according to your encoder.
-            # For demonstration, let's assume 'encoder' transforms features properly.
-            encoded_features = encoder.transform([features])
-            
-            # Predict
-            prediction = model.predict(encoded_features)
-            
-            # Convert prediction to a proper format, if necessary
-            prediction_response = {
-                'Openness Level': prediction[0][0],
-                'Conscientiousness Level': prediction[0][1],
-                'Extroversion Level': prediction[0][2],
-                'Agreeableness Level': prediction[0][3],
-                'Neuroticism Level': prediction[0][4],
-            }
-            
-            return JsonResponse({'status': 'success', 'prediction': prediction_response})
-        except Exception as e:
-            return JsonResponse({'status': 'error', 'message': str(e)})
-    else:
-        return JsonResponse({'status': 'error', 'message': 'Only POST requests are accepted'})
+#     def __init__(self, **kwargs):
+#         super().__init__(**kwargs)
+#         # Adjust the path to where your model is located
+#         model_file = 'D:\\research\\fashion-_frontend\\backend\\recommendation\\models\\random_forest_classifier.pkl'
+
+#         # Load the model
+#         with open(model_file, 'rb') as file:
+#             self.model = pickle.load(file)
+
+#     def post(self, request, *args, **kwargs):
+#         # Extract the encoded array from the request data
+#         encoded_array = request.data.get("encoded_array")
+
+#         # Convert the encoded array into a DataFrame, which is what the model expects for making a prediction
+#         # Assuming the array structure directly matches the model's expected input
+#         df_sample = pd.DataFrame([encoded_array])
+
+#         # Make the prediction
+#         predictions = self.model.predict(df_sample)
+#         predictions_list = predictions.tolist()  # Convert predictions to a list for JSON serialization
+
+#         # Return the predictions as a JSON response
+#         return JsonResponse({'predictions': predictions_list})
