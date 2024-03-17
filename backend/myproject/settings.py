@@ -46,6 +46,7 @@ INSTALLED_APPS = [
     'image_processing',
     "imagesearch",
     "store",
+    "recommendation",
 ]
 
 MIDDLEWARE = [
