@@ -1,4 +1,4 @@
-import React, { useState, useRef } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import "./ImageSearch.css";
 // import { ProductDetails } from "../ProductDetails/ProductDetails";
 import { ProductListing } from "../ProductListing/ProductListing";
@@ -11,6 +11,8 @@ function ImageSearch() {
   const fileInputRef = useRef(null);
   const [isLoading, setIsLoading] = useState(false);
   const [classLabels, setClassLabels] = useState([]);
+  const [allProducts, setAllProducts] = useState([]); // State to store all products
+  const [filteredProducts, setFilteredProducts] = useState([]);
 
   console.log(imageSrc, annotatedImage, croppedImages);
 
@@ -62,9 +64,35 @@ function ImageSearch() {
 
   const selectImage = (index, label) => {
     setSelectedImageIndex(index);
-    console.log("Selected image:", index, "Label:", label);
-    // You can now use both the index and the label for further processing
+    const matchingProducts = allProducts.filter((product) =>
+      product.category_name.toLowerCase().includes(label.toLowerCase())
+    );
+    setFilteredProducts(matchingProducts);
+    console.log("Matching Products:", matchingProducts);
+    setIsLoading(false); // Assume image processing is done and loading is complete
   };
+
+  useEffect(() => {
+    const fetchProducts = async () => {
+      try {
+        const response = await fetch(
+          "http://localhost:8000/api/store/products/"
+        );
+        if (response.ok) {
+          const products = await response.json();
+          console.log("Products:", products);
+          setAllProducts(products); // Set the products in state, pass them to components, etc.
+          // Set the products in state, pass them to components, etc.
+        } else {
+          throw new Error("Failed to fetch products");
+        }
+      } catch (error) {
+        console.error("Error:", error);
+      }
+    };
+
+    fetchProducts();
+  }, []);
 
   return (
     <>
@@ -133,7 +161,8 @@ function ImageSearch() {
         {/* <ProductDetails /> */}
       </div>
       <div className="product-listing-container">
-        <ProductListing />
+        <h2>Matching Products</h2>
+        <ProductListing products={filteredProducts} />
       </div>
     </>
   );

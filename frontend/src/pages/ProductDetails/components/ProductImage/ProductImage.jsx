@@ -1,8 +1,10 @@
+// ProductImage.jsx is a child component of ProductDetails.jsx
+
 import "./ProductImage.css";
 import Tilt from "react-parallax-tilt";
 
-
 import React from "react";
+import { products } from "../../../../backend/db/products";
 
 export const ProductImage = ({ selectedProduct }) => {
   return (
@@ -13,7 +15,7 @@ export const ProductImage = ({ selectedProduct }) => {
       className="product-details-image"
     >
       {" "}
-      <img src={selectedProduct?.img} alt={selectedProduct.name}/>
+      <img src={selectedProduct?.img} alt={selectedProduct.name} />
     </Tilt>
   );
 };
