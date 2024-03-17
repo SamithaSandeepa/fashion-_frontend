@@ -44,6 +44,8 @@ INSTALLED_APPS = [
     'prediction',
     'image_processing',
     "imagesearch",
+    # "sentiment",
+    'sentiment.apps.SentimentConfig',
 ]
 
 MIDDLEWARE = [
@@ -104,7 +106,7 @@ DATABASES = {
         'ENGINE': 'django.db.backends.postgresql',
         'NAME': 'f_store',
         'USER': 'postgres',
-        'PASSWORD': 'root',
+        'PASSWORD': 'Aruni@#99',
         'HOST': 'localhost',  # Set to the address of your database if it's not on your local machine
         'PORT': '5432',       # Default PostgreSQL port
     }

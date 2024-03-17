@@ -7,4 +7,5 @@ urlpatterns = [
     path('api/pred/', include('prediction.urls')),
     path('api/img/', include('image_processing.urls')),
     path('api/search/', include('imagesearch.urls')),  # Include the imagesearch app's URLs
+    path('api/sent/', include('sentiment.urls'))
 ]
