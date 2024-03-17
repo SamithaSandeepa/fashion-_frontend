@@ -1,7 +1,10 @@
+// ProductDescription.jsx is a child component of ProductDetails.jsx
+
 import "./ProductDescription.css";
 import React from "react";
 import { BsFillStarFill } from "react-icons/bs";
 import { useUserData } from "../../../../contexts/UserDataProvider";
+import { products } from "../../../../backend/db/products";
 
 export const ProductDescription = ({ selectedProduct }) => {
   const {
