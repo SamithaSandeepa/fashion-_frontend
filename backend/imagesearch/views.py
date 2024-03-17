@@ -6,6 +6,9 @@ from rest_framework.response import Response
 from rest_framework import status
 from ultralytics import YOLO
 from PIL import Image, ImageDraw
+from django.conf import settings
+import datetime
+import uuid
 
 # Define the class names for your model
 CLASS_NAMES = {
@@ -60,6 +63,10 @@ class ObjectDetection(APIView):
         if not uploaded_file or not isinstance(uploaded_file, InMemoryUploadedFile):
             return Response({'error': 'No image provided'}, status=status.HTTP_400_BAD_REQUEST)
 
+        file_name = os.path.basename(uploaded_file.name)
+        file_name_without_ext = os.path.splitext(file_name)[0]
+        file_extension = os.path.splitext(file_name)[1]
+
         image = Image.open(uploaded_file).convert('RGB')
         draw = ImageDraw.Draw(image)
 
@@ -68,34 +75,43 @@ class ObjectDetection(APIView):
         confidences = results[0].boxes.conf.cpu().numpy().tolist()
         class_labels = results[0].boxes.cls.cpu().numpy().tolist()
 
-        save_dir = 'D:\\Work\\sliit\\Research application\\Project Frontend\\fashion_store\\backend\\imagesearch\\detected_images'
-        
-        # Clear the directory before saving new images
-        clear_directory(save_dir)
+        save_dir = os.path.join(settings.MEDIA_ROOT, 'detected_images')
         os.makedirs(save_dir, exist_ok=True)
+        clear_directory(save_dir)
 
         cropped_images_paths = []
 
         for i, box in enumerate(boxes):
             class_label = CLASS_NAMES.get(class_labels[i], "unknown")
+            cropped_file_name = f"{class_label}.jpg"
             cropped_image = image.crop((box[0], box[1], box[2], box[3]))
-            cropped_file_name = f"{class_label}_{i}.jpg"
-            cropped_image_path = os.path.join(save_dir, cropped_file_name)
-            cropped_image.save(cropped_image_path)
-            cropped_images_paths.append(cropped_image_path)
+            cropped_image.save(os.path.join(save_dir, cropped_file_name))
+            relative_path = os.path.join(cropped_file_name)
+            cropped_images_paths.append(request.build_absolute_uri(settings.MEDIA_URL + relative_path))
 
             draw.rectangle(box[:4], outline="red", width=2)
 
-        file_name = os.path.basename(uploaded_file.name)
-        save_path = os.path.join(save_dir, f"detected_{file_name}")
-        image.save(save_path)
+        # Save the annotated image after drawing the boxes
+        annotated_file_name = f"detected_{file_name}"
+        annotated_image_path = os.path.join(save_dir, annotated_file_name)
+        image.save(annotated_image_path)
+
+        # Use forward slashes in URLs
+        annotated_image_url = request.build_absolute_uri(settings.MEDIA_URL + 'detected_images/' + annotated_file_name.replace("\\", "/"))
+
+        cropped_images_urls = []
+        for path in cropped_images_paths:
+            # Convert file paths to URLs and use forward slashes
+            url_path = 'detected_images/' + os.path.basename(path).replace("\\", "/")
+            cropped_image_url = request.build_absolute_uri(settings.MEDIA_URL + url_path)
+            cropped_images_urls.append(cropped_image_url)
 
         data = {
             'boxes': boxes,
             'confidences': confidences,
             'class_labels': [CLASS_NAMES.get(cl, "unknown") for cl in class_labels],
-            'annotated_image_path': save_path,
-            'cropped_images_paths': cropped_images_paths
+            'annotated_image_path': annotated_image_url,
+            'cropped_images_paths': cropped_images_urls
         }
 
         return Response(data, status=status.HTTP_200_OK)

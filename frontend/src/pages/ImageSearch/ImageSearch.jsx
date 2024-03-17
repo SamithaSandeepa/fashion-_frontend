@@ -1,18 +1,27 @@
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState, useRef } from "react";
+import "./ImageSearch.css";
+// import { ProductDetails } from "../ProductDetails/ProductDetails";
+import { ProductListing } from "../ProductListing/ProductListing";
 
 function ImageSearch() {
   const [imageSrc, setImageSrc] = useState("");
-  const [boundingBox, setBoundingBox] = useState({
-    x1: 0,
-    y1: 0,
-    x2: 0,
-    y2: 0,
-    width: 0,
-    height: 0,
-    show: false,
-  });
-  const [detectedImages, setDetectedImages] = useState([]);
-  const imageRef = useRef(null);
+  const [annotatedImage, setAnnotatedImage] = useState("");
+  const [croppedImages, setCroppedImages] = useState([]);
+  const [selectedImageIndex, setSelectedImageIndex] = useState(null);
+  const fileInputRef = useRef(null);
+  const [isLoading, setIsLoading] = useState(false);
+  const [classLabels, setClassLabels] = useState([]);
+
+  console.log(imageSrc, annotatedImage, croppedImages);
+
+  const handleImageChange = (event) => {
+    const file = event.target.files[0];
+    if (file) {
+      setImageSrc(URL.createObjectURL(file));
+      // If you want to start scanning right after image selection, call `handleSubmit()`
+      handleSubmit(event);
+    }
+  };
 
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -20,8 +29,8 @@ function ImageSearch() {
     const file = fileInput.files[0];
     if (file) {
       const formData = new FormData();
-      formData.append("image", file);
-
+      formData.append("image", file); // Make sure to append the file to formData
+      setIsLoading(true);
       try {
         const response = await fetch(
           "http://localhost:8000/api/search/detect",
@@ -31,95 +40,102 @@ function ImageSearch() {
           }
         );
         const data = await response.json();
-        console.log("Data:", data);
 
         setImageSrc(URL.createObjectURL(file));
 
-        if (data.boxes && data.boxes.length > 0) {
-          const [x1, y1, x2, y2] = data.boxes[0];
-          setBoundingBox({
-            x1,
-            y1,
-            x2,
-            y2,
-            width: x2 - x1,
-            height: y2 - y1,
-            show: true,
-          });
-        }
-
-        if (data.cropped_images_paths && data.cropped_images_paths.length > 0) {
-          setDetectedImages(
-            data.cropped_images_paths.map((path, index) => ({
-              url: `http://localhost:8000/static/detected_images/${path
-                .split("\\")
-                .pop()}`,
-              label: data.class_labels[index],
-            }))
-          );
-        }
+        setAnnotatedImage(data.annotated_image_path || "");
+        setCroppedImages(data.cropped_images_paths || []);
+        setClassLabels(data.class_labels || []);
+        setSelectedImageIndex(null); // Reset selection
+        setIsLoading(false); // Stop loading animation
+        console.log(data);
       } catch (error) {
         console.error("Error fetching data:", error);
+        setIsLoading(false);
       }
     }
   };
 
-  useEffect(() => {
-    if (boundingBox.show && imageRef.current) {
-      const img = imageRef.current;
-      const scaleWidth = img.width / img.naturalWidth;
-      const scaleHeight = img.height / img.naturalHeight;
+  const triggerFileInput = () => {
+    fileInputRef.current.click();
+  };
 
-      // Update boundingBox with scaled dimensions using the previous state
-      setBoundingBox((prev) => ({
-        ...prev,
-        x1: prev.x1 * scaleWidth,
-        y1: prev.y1 * scaleHeight,
-        width: prev.width * scaleWidth,
-        height: prev.height * scaleHeight,
-        show: true,
-      }));
-    }
-  }, [imageSrc]);
+  const selectImage = (index, label) => {
+    setSelectedImageIndex(index);
+    console.log("Selected image:", index, "Label:", label);
+    // You can now use both the index and the label for further processing
+  };
 
   return (
-    <div className="container">
-      <form onSubmit={handleSubmit} encType="multipart/form-data">
-        <input type="file" id="imageInput" name="image" accept="image/*" />
-        <button type="submit">Upload and Detect</button>
-      </form>
-
-      <div className="image-container" style={{ position: "relative" }}>
-        <img
-          ref={imageRef}
-          src={imageSrc}
-          alt="Uploaded"
-          onLoad={() => setBoundingBox((b) => ({ ...b, show: false }))}
-        />
-        {boundingBox.show && (
-          <div
-            className="bounding-box"
-            style={{
-              position: "absolute",
-              left: `${boundingBox.x1}px`,
-              top: `${boundingBox.y1}px`,
-              width: `${boundingBox.width}px`,
-              height: `${boundingBox.height}px`,
-              border: "2px solid red",
-            }}
+    <>
+      <div className="image-search-container">
+        <div className="upload-section">
+          <input
+            type="file"
+            id="imageInput"
+            name="image"
+            accept="image/*"
+            ref={fileInputRef}
+            onChange={handleImageChange}
+            style={{ display: "none" }}
           />
-        )}
-      </div>
+          <button onClick={triggerFileInput} className="upload-button">
+            Choose Image
+          </button>
+          {/* <button onClick={handleSubmit} className="submit-button">
+          Upload and Detect
+        </button> */}
+        </div>
+        {/* {isLoading && <div className="scanning-overlay"></div>} */}
 
-      <div className="detected-images">
-        {detectedImages.map((image, index) => (
-          <div key={index}>
-            <img src={image.url} alt={`Detected ${image.label}`} />
-            <p>{image.label}</p>
+        <div className="images-container">
+          {isLoading && (
+            <div className="annotated-image-section">
+              {imageSrc && (
+                <img src={imageSrc} alt="Uploading" className="full-image" />
+              )}
+              <div className="scanning-overlay"></div>
+            </div>
+          )}
+          {!isLoading && annotatedImage && (
+            <div className="annotated-image-section">
+              <img
+                src={annotatedImage}
+                alt="Annotated"
+                className="full-image"
+              />
+            </div>
+          )}
+
+          <div className="cropped-images-section">
+            <h2>Detected Items</h2>
+            <div className="cropped-images-grid">
+              {croppedImages.map((image, index) => (
+                <div
+                  key={index}
+                  className={`cropped-image-container ${
+                    selectedImageIndex === index ? "selected" : ""
+                  }`}
+                  onClick={() => selectImage(index, classLabels[index])}
+                >
+                  <img
+                    src={image}
+                    alt={`Cropped ${index}`}
+                    className="cropped-image"
+                  />
+                </div>
+              ))}
+            </div>
           </div>
-        ))}
+        </div>
       </div>
-    </div>
+      <div className="product-details-container">
+        {/* <ProductDetails /> */}
+      </div>
+      <div className="product-listing-container">
+        <ProductListing />
+      </div>
+    </>
   );
 }
 
