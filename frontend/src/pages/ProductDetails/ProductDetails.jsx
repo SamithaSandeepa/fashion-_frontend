@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import { ProductImage } from "./components/ProductImage/ProductImage";
 import { ProductDescription } from "./components/ProductDescription/ProductDescription";
+import { CommentSection } from "./components/CommentSection/CommentSection";
 import "./ProductDetails.css";
 
 export const ProductDetails = () => {
@@ -21,6 +22,7 @@ export const ProductDetails = () => {
         }
         const data = await response.json();
         setProduct(data);
+        console.log(data.id);
       } catch (error) {
         console.error("Error fetching product:", error);
       } finally {
@@ -36,11 +38,18 @@ export const ProductDetails = () => {
   }
 
   return (
+
     product && (
       <div className="products-page-container">
         <ProductImage selectedProduct={product} />
         <ProductDescription selectedProduct={product} />
+        <div>
+      <CommentSection selectedProduct={product.id}/>
+    </div>
       </div>
+      
     )
+    
+
   );
 };
