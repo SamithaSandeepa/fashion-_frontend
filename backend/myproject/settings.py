@@ -45,7 +45,7 @@ INSTALLED_APPS = [
     'prediction',
     'image_processing',
     "imagesearch",
-    # "sentiment",
+    "comments",
     'sentiment.apps.SentimentConfig',
     "store",
 ]

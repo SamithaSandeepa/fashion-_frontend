@@ -20,6 +20,7 @@ import { CustomerSentiment } from "../pages/Admin/CustomerSentiment/CustomerSent
 import {ProductReview} from "../pages/Admin/CustomerSentiment/ProductReview";
 import { Reviewsexplain } from "../pages/Admin/CustomerSentiment/Reviewsexplain";
 import ImageSearch from "../pages/ImageSearch/ImageSearch";
+import { BarGraph } from "../pages/Admin/CustomerSentiment/BarGraph"; // Make sure to import the BarGraph component correctly}
 
 export const NavRoutes = () => {
   return (
@@ -76,6 +77,7 @@ export const NavRoutes = () => {
       <Route path="/neutral-reviews/:productId" element={<Reviewsexplain />} />
       <Route path="/slightly-positive-reviews/:productId" element={<Reviewsexplain />} />
       <Route path="/slightly-negative-reviews/:productId" element={<Reviewsexplain />} />
+      <Route path="/bar-graph" element={<BarGraph />} />
 
 
 
