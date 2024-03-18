@@ -8,6 +8,7 @@ nav {
   background-color: black;
   top: 0;
   z-index: 3;
+  align-items: center;
 }
 
 .nav-logo-home-button {
@@ -117,6 +118,14 @@ input:focus {
   border-radius: 18px;
   display: flex;
   align-items: center;
+  justify-content: center;
+  flex-grow: 1;
+  max-width: 300px;
+}
+/* Ensure other elements in the nav bar are aligned properly */
+.nav-logo-home-button,
+.nav-link-container {
+  flex-shrink: 0; /* Prevent these elements from shrinking */
 }
 
 .nav-input-search input {

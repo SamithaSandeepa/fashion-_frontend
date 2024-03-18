@@ -1,18 +1,20 @@
 .logout-container {
-  text-align: center;
+  display: inline-block; /* Align with other nav items */
 }
 
 .logout-container button {
-  color: white;
-  border: none;
-  padding: 10px 30px;
+  color: rgb(176, 175, 175);
+  background-color: transparent;
+  border: 1px solid rgb(24, 24, 24);
+  padding: 10px 15px;
   border-radius: 5px;
-  background-color: var(--primary-color);
-  font-weight: 600;
-  margin: 15px 0 0px 0;
+  font-weight: 400;
+  text-align: center;
+  text-decoration: none;
 }
 
 .logout-container button:hover {
+  color: white;
+  background-color: rgb(42, 42, 42);
   cursor: pointer;
-  background-color: black;
 }

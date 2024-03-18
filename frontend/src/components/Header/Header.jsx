@@ -11,6 +11,7 @@ import { useAuth } from "../../contexts/AuthProvider";
 import { CgShoppingCart } from "react-icons/cg";
 import { useUserData } from "../../contexts/UserDataProvider";
 import { SiTaichilang } from "react-icons/si";
+import { Logout } from "../../pages/auth/Logout/Logout";
 
 export const Header = () => {
   const { auth } = useAuth();
@@ -78,18 +79,14 @@ export const Header = () => {
           }}
           placeholder="Search"
         />
-        {/* <input
-          type="file"
-          id="imageUpload"
-          accept="image/*"
-          className="hidden"
-          onChange={handleImageUpload}
-        /> */}
-
-        <button onClick={handleImageSearch}>
+        <button>
           <GrSearch size={16} />
         </button>
-        <label htmlFor="imageUpload" className="image-upload-icon">
+        <label
+          htmlFor="imageUpload"
+          className="image-upload-icon"
+          onClick={handleImageSearch}
+        >
           <GrCamera size={16} />
         </label>
       </div>
@@ -113,13 +110,13 @@ export const Header = () => {
             : "nav-link-container"
         }
       >
-        <NavLink
+        {/* <NavLink
           onClick={() => setShowHamburger(true)}
           style={getActiveStyle}
           to="/product-listing"
         >
           Explore
-        </NavLink>
+        </NavLink> */}
         <NavLink
           onClick={() => setShowHamburger(true)}
           style={getActiveStyle}
@@ -154,6 +151,7 @@ export const Header = () => {
             </span>
           )}
         </NavLink>
+        <NavLink>{auth.isAuth && <Logout />} </NavLink>
       </div>
       {showHamburger && (
         <div className="hamburger-icon" onClick={() => setShowHamburger(false)}>

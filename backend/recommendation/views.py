@@ -33,3 +33,50 @@ class PredictPersonalityView(APIView):
             return JsonResponse({'predictions': predictions_list})
         except Exception as e:
             return JsonResponse({'error': str(e)}, status=500)
+
+# [
+#     1, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0
+# ]
+# sample = [
+#     1,  # Gender_Female
+#     0,  # Gender_Male
+#     0,  # Age Category_0-19
+#     0,  # Age Category_20-29
+#     1,  # Age Category_30-39
+#     0,  # Age Category_40-49
+#     0,  # Age Category_50-59
+#     0,  # Age Category_60+
+#     0,  # Location _Central
+#     0,  # Location _Eastern
+#     0,  # Location _North Central
+#     0,  # Location _North Western
+#     1,  # Location _Northern
+#     0,  # Location _Sabaragamuwa
+#     0,  # Location _Southern
+#     0,  # Location _Uva
+#     0,  # Location _Western
+#     0,  # Hobby_Cooking
+#     0,  # Hobby_Cricket
+#     0,  # Hobby_Other
+#     0,  # Hobby_Painting
+#     1,  # Hobby_Reading
+#     0,  # Hobby_Sports
+#     0,  # Hobby_Travelling
+#     0,  # Hobby_Watching Movies
+#     0,  # Favorite Color_Black
+#     1,  # Favorite Color_Blue
+#     0,  # Favorite Color_Green
+#     0,  # Favorite Color_Other
+#     0,  # Favorite Color_Purple
+#     0,  # Favorite Color_Red
+#     0,  # Favorite Color_White
+#     0,  # Favorite Color_Yellow
+#     0,  # Sport_BallSports
+#     1,  # Sport_Cricket
+#     0,  # Sport_No Sport
+#     0,  # Sport_Other
+#     0,  # Sport_Running
+#     0,  # Sport_Soccer
+#     0,  # Sport_Swimming
+#     0   # Sport_Tennis
+# ]

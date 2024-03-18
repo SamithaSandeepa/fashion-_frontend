@@ -1,81 +1,77 @@
+import React, { useState } from "react";
 import "./Signup.css";
-import { Link, useLocation, useNavigate } from "react-router-dom";
-import { BsEyeSlash } from "react-icons/bs";
-import { BsEye } from "react-icons/bs";
-import { useState } from "react";
-
-import React from "react";
+import { Link, useNavigate } from "react-router-dom";
+import { BsEyeSlash, BsEye } from "react-icons/bs";
 import { useAuth } from "../../../contexts/AuthProvider";
-import { signupService } from "../../../services/auth-services/signupService";
 import { toast } from "react-hot-toast";
-import { useData } from "../../../contexts/DataProvider";
 
 export const Signup = () => {
-  const { loading } = useData();
+  const navigate = useNavigate();
+  const { updateAuth } = useAuth();
 
   const [hidePassword, setHidePassword] = useState(true);
   const [hideConfirmPassword, setHideConfirmPassword] = useState(true);
   const [signUpLoading, setSignUpLoading] = useState(false);
-  const { setAuth, loginHandler, error, setError } = useAuth();
-
-  const navigate = useNavigate();
+  const [error, setError] = useState("");
 
   const [signupCredential, setSignupCredential] = useState({
+    username: "",
     email: "",
     password: "",
     confirmPassword: "",
-    firstName: "",
-    lastName: "",
+    user_type: "1",
   });
 
   const signupHandler = async () => {
+    if (signupCredential.password !== signupCredential.confirmPassword) {
+      toast.error("Passwords do not match");
+      return;
+    }
+
     try {
       setSignUpLoading(true);
       setError("");
-      if (signupCredential.password === signupCredential.confirmPassword) {
-        const response = await signupService(
-          signupCredential.email,
-          signupCredential.password,
-          signupCredential.firstName,
-          signupCredential.lastName
+
+      const response = await fetch("http://localhost:8000/api/auth/register/", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          username: signupCredential.username,
+          password: signupCredential.password,
+          email: signupCredential.email,
+          user_type: signupCredential.user_type,
+        }),
+      });
+
+      const data = await response.json();
+
+      if (response.ok) {
+        setSignUpLoading(false);
+        toast.success(
+          `You've successfully signed up, ${signupCredential.username}`
         );
-        if (response.status === 201) {
-          setSignUpLoading(false);
-          toast.success(
-            `You've successfully signed up, ${response.data.createdUser.firstName}`
-          );
-          const encodedToken = response.data.encodedToken;
-          const firstName = response.data.createdUser.firstName;
-          const lastName = response.data.createdUser.lastName;
-          const email = response.data.createdUser.email;
 
-          setAuth({
-            token: encodedToken,
-            isAuth: true,
-            firstName,
-            lastName,
-            email,
-          });
+        // In your signupHandler function
+        updateAuth({
+          token: data.token,
+          isAuth: true,
+          username: signupCredential.username,
+        });
 
-          localStorage.setItem("token", encodedToken);
-          localStorage.setItem("isAuth", true);
-          localStorage.setItem("firstName", firstName);
-          localStorage.setItem("lastName", lastName);
-          localStorage.setItem("email", email);
-
-          navigate("/");
-        }
+        localStorage.setItem("token", data.token);
+        localStorage.setItem("isAuth", true);
+        navigate("/");
+      } else {
+        throw new Error(data.detail || "Failed to sign up");
       }
     } catch (error) {
       setSignUpLoading(false);
-      setError(error.response.data.errors);
-    } finally {
-      setSignUpLoading(false);
+      setError(error.message || "An error occurred during signup");
     }
   };
 
   return (
-    !loading && (
+    !signUpLoading && (
       <div className="signup-container">
         <h2>Sign Up</h2>
         <form
@@ -85,10 +81,28 @@ export const Signup = () => {
           }}
           className="signup-body"
         >
-          <div className="email-container">
-            <label htmlFor="email">Email Address</label>
+          <div className="username-container">
+            <label htmlFor="username">Username</label>
             <input
               required
+              value={signupCredential.username}
+              onChange={(e) =>
+                setSignupCredential({
+                  ...signupCredential,
+                  username: e.target.value,
+                })
+              }
+              id="username"
+              placeholder="Username"
+              type="text"
+            />
+          </div>
+
+          <div className="email-container">
+            <label htmlFor="email">Email</label>
+            <input
+              required
+              value={signupCredential.email}
               onChange={(e) =>
                 setSignupCredential({
                   ...signupCredential,
@@ -96,7 +110,7 @@ export const Signup = () => {
                 })
               }
               id="email"
-              placeholder="Enter Email"
+              placeholder="Email Address"
               type="email"
             />
           </div>
@@ -106,6 +120,7 @@ export const Signup = () => {
             <div className="input-container">
               <input
                 required
+                value={signupCredential.password}
                 onChange={(e) =>
                   setSignupCredential({
                     ...signupCredential,
@@ -113,103 +128,57 @@ export const Signup = () => {
                   })
                 }
                 id="password"
-                minLength="8"
-                placeholder="Enter Password"
+                placeholder="Password"
                 type={hidePassword ? "password" : "text"}
-              />{" "}
-              {!hidePassword ? (
-                <BsEye
+              />
+              {hidePassword ? (
+                <BsEyeSlash
                   className="hide-show-password-eye"
                   onClick={() => setHidePassword(!hidePassword)}
                 />
               ) : (
-                <BsEyeSlash
+                <BsEye
                   className="hide-show-password-eye"
                   onClick={() => setHidePassword(!hidePassword)}
                 />
               )}
             </div>
           </div>
-
           <div className="confirm-password-container">
-            <label for="confirm-password">Confirm Password</label>
+            <label htmlFor="confirm-password">Confirm Password</label>
             <div className="input-container">
               <input
                 required
-                id="confirm-password"
+                value={signupCredential.confirmPassword}
                 onChange={(e) =>
                   setSignupCredential({
                     ...signupCredential,
                     confirmPassword: e.target.value,
                   })
                 }
-                minLength="8"
-                placeholder="Enter Password Again"
-                type={hidePassword ? "password" : "text"}
-              />{" "}
-              {!hidePassword ? (
-                <BsEye
+                id="confirm-password"
+                placeholder="Confirm Password"
+                type={hideConfirmPassword ? "password" : "text"}
+              />
+              {hideConfirmPassword ? (
+                <BsEyeSlash
                   className="hide-show-password-eye"
                   onClick={() => setHideConfirmPassword(!hideConfirmPassword)}
                 />
               ) : (
-                <BsEyeSlash
+                <BsEye
                   className="hide-show-password-eye"
-                  onClick={() => setHidePassword(!hidePassword)}
+                  onClick={() => setHideConfirmPassword(!hideConfirmPassword)}
                 />
               )}
             </div>
           </div>
 
-          <div className="name-container">
-            <label htmlFor="first-name">First Name</label>
-            <input
-              onChange={(e) =>
-                setSignupCredential({
-                  ...signupCredential,
-                  firstName: e.target.value,
-                })
-              }
-              id="first-name"
-              placeholder="Enter First Name"
-              type="text"
-            />
-          </div>
-
-          <div className="name-container">
-            <label htmlFor="last-name">Last Name</label>
-            <input
-              onChange={(e) =>
-                setSignupCredential({
-                  ...signupCredential,
-                  lastName: e.target.value,
-                })
-              }
-              id="last-name"
-              placeholder="Enter Last Name"
-              type="text"
-            />
-          </div>
-
-          <div className="remember-me-container">
-            <div>
-              <input required name="remember-me" type="checkbox" />
-              <label htmlFor="remember-me">
-                I accept all terms and conditions
-              </label>
-            </div>
-          </div>
-          {error && <p className="error">{error[0]}</p>}
+          {/* Error display and submission button */}
+          {error && <p className="error">{error}</p>}
 
           <div className="signup-btn-container">
             <input value="Sign Up" type="submit" />
-            <button
-              onClick={(e) => {
-                loginHandler(e, "chiragtaluja@apple.com", "chiragtaluja");
-              }}
-            >
-              Login with Test Credentials
-            </button>
           </div>
           <Link to="/login">Already have an account?</Link>
         </form>

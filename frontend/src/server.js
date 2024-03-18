@@ -92,6 +92,8 @@ export function makeServer({ environment = "development" } = {}) {
       this.passthrough("http://localhost:8000/api/search/test");
       this.passthrough("http://localhost:8000/api/store/products/");
       this.passthrough("http://localhost:8000/api/store/products/:id/");
+      this.passthrough("http://localhost:8000/api/auth/login/");
+      this.passthrough("http://localhost:8000/api/auth/register/");
 
       // auth routes (public)
       this.post("/auth/signup", signupHandler.bind(this));

@@ -6,22 +6,21 @@ import { useUserData } from "../../../contexts/UserDataProvider";
 import "./Logout.css";
 
 export const Logout = () => {
-  const { dispatch } = useUserData();
   const navigate = useNavigate();
-  const { setAuth } = useAuth();
+  const { logoutHandler } = useAuth(); // Assuming logoutHandler is provided by useAuth
+  const { dispatch } = useUserData();
 
-  const logoutHandler = () => {
-    localStorage.removeItem("isAuth");
-    localStorage.removeItem("token");
-    setAuth({ token: "", isAuth: false });
+  const handleLogout = () => {
+    logoutHandler(); // Call the logoutHandler from AuthContext
     toast.success("You're logged out successfully!");
     dispatch({ type: "SET_CART", payload: [] });
     dispatch({ type: "SET_WISHLIST", payload: [] });
     navigate("/");
   };
+
   return (
     <div className="logout-container">
-      <button onClick={logoutHandler}>Logout</button>
+      <button onClick={handleLogout}>Logout</button>
     </div>
   );
 };

@@ -24,6 +24,21 @@
   justify-content: space-around;
 }
 
+.login-container .username-container {
+  display: flex;
+  flex-flow: column nowrap;
+}
+
+.login-container .username-container > label {
+  margin-bottom: 5px;
+}
+
+.login-container .username-container input {
+  padding: 5px 10px;
+  border-radius: 3px;
+  border: 1px solid rgb(210, 210, 210);
+}
+
 .login-container .email-container {
   /* border: 1px solid black; */
   display: flex;
