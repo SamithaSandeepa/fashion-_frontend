@@ -1,5 +1,6 @@
 from django.contrib.auth import get_user_model
 from rest_framework import serializers
+from .models import UserProfile, CustomUser
 
 class CustomUserSerializer(serializers.ModelSerializer):
     class Meta:
@@ -8,12 +9,10 @@ class CustomUserSerializer(serializers.ModelSerializer):
         extra_kwargs = {'password': {'write_only': True}}
 
     def create(self, validated_data):
-        # Remove the password from the validated_data dictionary
-        password = validated_data.pop('password', None)
-        # Create the user instance
-        instance = self.Meta.model(**validated_data)
-        # Check if password is present and set it
-        if password is not None:
-            instance.set_password(password)
-        instance.save()
-        return instance
+        user = CustomUser.objects.create_user(**validated_data)
+        return user
+    
+class UserProfileSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = UserProfile
+        fields = ('bio', 'phone_number')  # Include all fields from UserProfile

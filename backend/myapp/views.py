@@ -1,11 +1,11 @@
-from django.contrib.auth import get_user_model
-from rest_framework import generics
+# myapp/views.py
+from django.contrib.auth import get_user_model, authenticate
+from rest_framework import generics, views, permissions, status
 from rest_framework.authtoken.models import Token
 from rest_framework.response import Response
-from .serializers import CustomUserSerializer
-from django.contrib.auth import authenticate
-from rest_framework.views import APIView
-from rest_framework import status
+from .serializers import CustomUserSerializer, UserProfileSerializer
+from .models import UserProfile
+from rest_framework.permissions import IsAuthenticated
 
 class CustomUserCreate(generics.CreateAPIView):
     queryset = get_user_model().objects.all()
@@ -17,7 +17,7 @@ class CustomUserCreate(generics.CreateAPIView):
         token, created = Token.objects.get_or_create(user=user)
         return Response({'token': token.key, 'user_id': response.data['id']})
 
-class LoginView(APIView):
+class LoginView(views.APIView):
 
     def post(self, request):
         username = request.data.get("username")
@@ -30,8 +30,20 @@ class LoginView(APIView):
         else:
             return Response({"error": "Wrong Credentials"}, status=status.HTTP_400_BAD_REQUEST)
         
-class LogoutView(APIView):
+class LogoutView(views.APIView):
     def post(self, request):
-        # simply delete the token to force a login
         request.auth.delete()
         return Response(status=status.HTTP_200_OK)
+    
+class UserProfileView(generics.RetrieveUpdateAPIView):
+    serializer_class = UserProfileSerializer
+    permission_classes = [permissions.IsAuthenticated]
+
+    def get_queryset(self):
+        # This method ensures that users can only access their own profile
+        return UserProfile.objects.filter(user=self.request.user)
+
+    def get_object(self):
+        # This method gets the user's profile or creates it if it doesn't exist
+        obj, created = UserProfile.objects.get_or_create(user=self.request.user)
+        return obj

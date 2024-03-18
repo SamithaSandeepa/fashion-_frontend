@@ -41,13 +41,14 @@ INSTALLED_APPS = [
     'rest_framework',
     'rest_framework.authtoken',
     'corsheaders',
-    'myapp',
+    'myapp.apps.MyAppConfig',
     'prediction',
     'image_processing',
     "imagesearch",
     "comments",
     'sentiment.apps.SentimentConfig',
     "store",
+    "recommendation",
 ]
 
 MIDDLEWARE = [
@@ -110,7 +111,7 @@ DATABASES = {
         'ENGINE': 'django.db.backends.postgresql',
         'NAME': 'f_store',
         'USER': 'postgres',
-        'PASSWORD': 'Aruni@#99',
+        'PASSWORD': 'root',
         'HOST': 'localhost',  # Set to the address of your database if it's not on your local machine
         'PORT': '5432',       # Default PostgreSQL port
     }
