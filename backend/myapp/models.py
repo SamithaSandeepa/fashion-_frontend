@@ -12,12 +12,19 @@ class CustomUser(AbstractUser):
     user_type = models.PositiveSmallIntegerField(choices=USER_TYPE_CHOICES)
     # You can add other fields specific to the user here
 
-# Define the UserProfile model
 class UserProfile(models.Model):
     user = models.OneToOneField(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, related_name='profile')
-    bio = models.TextField(blank=True, null=True)
-    phone_number = models.CharField(max_length=15, blank=True, null=True)
-    # You can add more fields to the user profile here
+    gender = models.CharField(max_length=10, blank=True, null=True)
+    ageGroup = models.CharField(max_length=10, blank=True, null=True)
+    province = models.CharField(max_length=50, blank=True, null=True)
+    hobby = models.CharField(max_length=50, blank=True, null=True)
+    color = models.CharField(max_length=50, blank=True, null=True)
+    sport = models.CharField(max_length=50, blank=True, null=True)
+    Openness_Level = models.CharField(max_length=10, blank=True, null=True)
+    Conscientiousness_Level = models.CharField(max_length=10, blank=True, null=True)
+    Extroversion_Level = models.CharField(max_length=10, blank=True, null=True)
+    Agreeableness_Level = models.CharField(max_length=10, blank=True, null=True)
+    Neuroticism_Level = models.CharField(max_length=10, blank=True, null=True)
 
     def __str__(self):
         return f'{self.user.username} Profile'

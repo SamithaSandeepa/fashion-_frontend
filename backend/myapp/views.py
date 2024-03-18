@@ -35,15 +35,17 @@ class LogoutView(views.APIView):
         request.auth.delete()
         return Response(status=status.HTTP_200_OK)
     
+from rest_framework import generics, permissions
+from .models import UserProfile
+from .serializers import UserProfileSerializer
+
 class UserProfileView(generics.RetrieveUpdateAPIView):
     serializer_class = UserProfileSerializer
     permission_classes = [permissions.IsAuthenticated]
 
     def get_queryset(self):
-        # This method ensures that users can only access their own profile
         return UserProfile.objects.filter(user=self.request.user)
 
     def get_object(self):
-        # This method gets the user's profile or creates it if it doesn't exist
         obj, created = UserProfile.objects.get_or_create(user=self.request.user)
         return obj

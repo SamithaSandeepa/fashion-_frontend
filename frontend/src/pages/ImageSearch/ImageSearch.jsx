@@ -67,6 +67,7 @@ function ImageSearch() {
     const matchingProducts = allProducts.filter((product) =>
       product.category_name.toLowerCase().includes(label.toLowerCase())
     );
+    console.log(label, "Matching Products:", matchingProducts);
     setFilteredProducts(matchingProducts);
     console.log("Matching Products:", matchingProducts);
     setIsLoading(false); // Assume image processing is done and loading is complete

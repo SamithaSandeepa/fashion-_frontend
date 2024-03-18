@@ -11,7 +11,7 @@
   margin: 1em 1em 2em 1em;
   border-radius: 1em;
   width: 250px;
-  height: 470px;
+  height: 300px;
   justify-content: space-between;
   display: flex;
   flex-flow: column nowrap;
@@ -30,14 +30,18 @@
 .product-card-image {
   background-color: rgb(246, 246, 246);
   border-radius: 0.8em;
+  overflow: hidden; /* Ensures the image does not overflow the container */
+  display: flex; /* Aligns the child img element */
+  justify-content: center; /* Center horizontally */
+  align-items: center; /* Center vertically */
 }
 
 .product-card-image img {
-  height: 230px;
-  bottom: -2em;
-  width: 140%;
-  object-fit: cover;
-  margin-left: -3em;
+  height: auto; /* Adjust height automatically to maintain aspect ratio */
+  max-height: 150px; /* Maximum height of the image */
+  width: auto; /* Adjust width automatically to maintain aspect ratio */
+  max-width: 100%; /* Maximum width of the image */
+  object-fit: contain; /* Ensures the image is scaled correctly within the element */
 }
 
 .product-card-details {
