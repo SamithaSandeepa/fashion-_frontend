@@ -12,7 +12,7 @@ export const CustomerSentiment = () => {
   const [sentimentData, setSentimentData] = useState({});
 
 
-    const [products, setProducts] = useState([]);
+  const [products, setProducts] = useState([]);
 
     // Function to process sentiment analysis results
 const processSentimentResults = (results) => {
