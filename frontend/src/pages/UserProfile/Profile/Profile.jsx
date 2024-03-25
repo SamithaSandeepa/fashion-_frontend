@@ -147,7 +147,7 @@ export const Profile = () => {
                     readOnly={!isEditing}
                   />
                 </div>
-                <div className="info-item">
+                {/* <div className="info-item">
                   <label htmlFor="Openness_Level">Openness Level:</label>
                   <input
                     type="text"
@@ -197,7 +197,7 @@ export const Profile = () => {
                     value={profileData.Neuroticism_Level}
                     readOnly={!isEditing}
                   />
-                </div>
+                </div> */}
                 <div className="action-buttons">
                   {isEditing ? (
                     <button className="save" onClick={handleSave}>
