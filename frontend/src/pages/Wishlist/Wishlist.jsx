@@ -30,7 +30,7 @@ export const Wishlist = () => {
                 <img
                   className="img-container"
                   alt={product.name}
-                  src={product.img}
+                  src={product.img_url}
                 />
               </div>
 

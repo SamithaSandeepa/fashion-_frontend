@@ -21,7 +21,7 @@ export const CartListing = () => {
       {userDataState.cartProducts.map((product) => (
         <div className="cart-product-card" key={product.id}>
           <div>
-            <img className="cart-img" alt={product.name} src={product.img} />
+            <img className="cart-img" alt={product.name} src={product.img_url} />
           </div>
           <div className="product-description">
             <h3>{product.name}</h3>

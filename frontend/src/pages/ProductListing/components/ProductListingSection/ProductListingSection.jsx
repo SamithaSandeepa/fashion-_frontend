@@ -60,7 +60,7 @@ export const ProductListingSection = ({ products: propProducts }) => {
             <div className="product-card">
               <Link to={`/product-details/${product.id}`}>
                 <div className="product-card-image">
-                  <img src={product.img} alt={product.name} />
+                  <img src={product.img_url} alt={product.name} />
                 </div>
               </Link>
 

@@ -23,6 +23,7 @@ import ImageSearch from "../pages/ImageSearch/ImageSearch";
 import { BarGraph } from "../pages/Admin/CustomerSentiment/BarGraph"; // Make sure to import the BarGraph component correctly}
 import { Questionnaire } from "../pages/auth/Signup/Questionnaire";
 import { UserProfileA } from "../pages/UserProfile/anjalee_profile/UserProfile";
+import { AddProduct } from "../pages/Admin/Product/AddProduct";
 
 export const NavRoutes = () => {
   return (
@@ -86,6 +87,9 @@ export const NavRoutes = () => {
         element={<Reviewsexplain />}
       />
       <Route path="/bar-graph" element={<BarGraph />} />
+
+      {/* products */}
+      <Route path="/add-product" element={<AddProduct />} />
 
       {/* image search */}
       <Route path="/image-search" element={<ImageSearch />} />
