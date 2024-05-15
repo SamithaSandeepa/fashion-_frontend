@@ -6,6 +6,12 @@ import os
 from rest_framework.views import APIView
 from rest_framework.parsers import JSONParser
 
+# Mapping of predicted values to target trait levels
+trait_levels = {
+    0: 'Low',
+    1: 'High'
+}
+
 class PredictPersonalityView(APIView):
     parser_classes = [JSONParser]
 
@@ -17,7 +23,8 @@ class PredictPersonalityView(APIView):
 
     def post(self, request, *args, **kwargs):
         # Directly use the request data if it's already a list
-        encoded_array = request.data if isinstance(request.data, list) else request.data.get("encoded_array", [])
+        encoded_array = request.data if isinstance(request.data, list) else request.data.get("data", [])
+        print(encoded_array)
 
         # Ensure the encoded_array is not empty
         if not encoded_array:
@@ -30,9 +37,13 @@ class PredictPersonalityView(APIView):
             # Make the prediction
             predictions = self.model.predict(df_sample)
             predictions_list = predictions.tolist()  # Convert predictions to a list for JSON serialization
-            return JsonResponse({'predictions': predictions_list})
+            # Map predicted values to target trait levels
+            mapped_predictions = [trait_levels[pred] for pred in predictions_list[0]]
+
+            return JsonResponse({'predictions': mapped_predictions})
         except Exception as e:
             return JsonResponse({'error': str(e)}, status=500)
+        
 
 # [
 #     1, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0
@@ -80,3 +91,96 @@ class PredictPersonalityView(APIView):
 #     0,  # Sport_Swimming
 #     0   # Sport_Tennis
 # ]
+
+from rest_framework.views import APIView
+from rest_framework.response import Response
+from rest_framework import status
+import pandas as pd
+import pickle
+import numpy as np
+import os
+
+# Load your model
+model_path = os.path.join(os.path.dirname(__file__), 'models', 'anji_model2.pkl')
+with open(model_path, 'rb') as file:
+    model = pickle.load(file)
+
+class PredictFashionView(APIView):
+    def post(self, request, *args, **kwargs):
+        # Initialize sample data with all 0
+        sample_data = {
+            'Gender_Female': [0],
+            'Gender_Male': [0],
+            'Favorite Color_Blue': [0],
+            'Favorite Color_Green': [0],
+            'Favorite Color_Other': [0],
+            'Favorite Color_Purple': [0],
+            'Favorite Color_Red': [0],
+            'Favorite Color_White': [0],
+            'Favorite Color_Yellow': [0],
+            'Openness Level_High': [0],
+            'Openness Level_Low': [0],
+            'Conscientiousness Level_High': [0],
+            'Conscientiousness Level_Low': [0],
+            'Extroversion Level_High': [0],
+            'Extroversion Level_Low': [0],
+            'Agreeableness Level_High': [0],
+            'Agreeableness Level_Low': [0],
+            'Neuroticism Level_High': [0],
+            'Neuroticism Level_Low': [0],
+            'Age Category_0-19': [0],
+            'Age Category_20-29': [0],
+            'Age Category_30-39': [0],
+            'Age Category_40-49': [0],
+            'Age Category_50-59': [0],
+            'Age Category_60+': [0],
+        }
+# sample_data = {
+#             'Gender_Female': [0],
+#             'Gender_Male': [0],
+#             'Favorite Color_Blue': [0],
+#             'Favorite Color_Green': [0],
+#             'Favorite Color_Other': [0],
+#             'Favorite Color_Purple': [0],
+#             'Favorite Color_Red': [0],
+#             'Favorite Color_White': [0],
+#             'Favorite Color_Yellow': [0],
+#             'Openness Level_High': [0],
+#             'Openness Level_Low': [0],
+#             'Conscientiousness Level_High': [0],
+#             'Conscientiousness Level_Low': [0],
+#             'Extroversion Level_High': [0],
+#             'Extroversion Level_Low': [0],
+#             'Neuroticism'+request.data['Neuroticism']: 1,
+#             'Age': 1,
+#         }
+        # Update sample_data based on request data
+        user_data = request.data
+        for key in user_data:
+            if key in sample_data:
+                sample_data[key] = [user_data[key]]
+
+        # Convert the dictionary to a DataFrame
+        sample_df = pd.DataFrame(sample_data)
+
+        # Predict
+        predicted_values = model.predict(sample_df)
+
+        # Decode the prediction (Assuming a binary classification for each label)
+        def decode_prediction(predicted_output, target_columns):
+            predicted_classes = [target_columns[idx] for idx, value in enumerate(predicted_output[0]) if value == 1]
+            return predicted_classes
+
+        # Sample target variable columns (adjust according to your model's output)
+        target_columns = [
+            'Fashion Style_Casual', 'Fashion Style_Formal', 'Fashion Style_Minimalist', 'Fashion Style_Other', 'Fashion Style_Sporty', 'Fashion Style_Vintage',
+            'Fashion Brand_Adidas', 'Fashion Brand_Gucci', 'Fashion Brand_H&M', 'Fashion Brand_Nike', 'Fashion Brand_No Brand', 'Fashion Brand_Other', 'Fashion Brand_Zara',
+            'Cloth Type_Bottoms', 'Cloth Type_Dresses', 'Cloth Type_Footwear', 'Cloth Type_Other', 'Cloth Type_Shirt', 'Cloth Type_Skirt', 'Cloth Type_T-shirt', 'Cloth Type_Tops', 'Cloth Type_Trouser',
+            'Garment Fitting_Baggy', 'Garment Fitting_Classic Fit', 'Garment Fitting_Other', 'Garment Fitting_Regular Fit', 'Garment Fitting_Slim Fit'
+        ]
+
+        # Decode the prediction
+        predicted_classes = decode_prediction(predicted_values, target_columns)
+        print("Predicted Classes:", predicted_classes)
+
+        return Response(predicted_classes, status=status.HTTP_200_OK)

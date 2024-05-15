@@ -13,7 +13,7 @@ class Product(models.Model):
     description = models.TextField()
     trending = models.BooleanField(default=False)
     size = models.IntegerField()
-    img = models.URLField()
+    img_url = models.URLField(blank=True)
 
     def __str__(self):
         return self.name

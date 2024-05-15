@@ -12,6 +12,8 @@ https://docs.djangoproject.com/en/4.1/ref/settings/
 
 from pathlib import Path
 import os
+import firebase_admin
+from firebase_admin import credentials
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -116,6 +118,21 @@ DATABASES = {
         'PORT': '5432',       # Default PostgreSQL port
     }
 }
+
+# Path to your Firebase service account key JSON file
+# firebase_credentials_path = os.path.join(BASE_DIR, 'firebase_credentials.json')
+# Firebase Config
+FIREBASE_CONFIG = {
+    "apiKey": "AIzaSyB0yvL8QTZORJHuN7KHG1l_BJfYsKjWVaE",
+    "authDomain": "ebike-eb4df.firebaseapp.com",
+    "databaseURL": "https://ebike-eb4df-default-rtdb.firebaseio.com",
+    "projectId": "ebike-eb4df",
+    "storageBucket": "ebike-eb4df.appspot.com",
+    "messagingSenderId": "500658682494",
+    "appId": "1:500658682494:web:4646becf97a3c81850b62f",
+    "measurementId": "G-ZWRPRXS02P"
+}
+
 
 # Password validation
 # https://docs.djangoproject.com/en/4.1/ref/settings/#auth-password-validators

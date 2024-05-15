@@ -23,7 +23,7 @@ export const UserProfile = () => {
             >
               Profile
             </Link>
-            <Link
+            {/* <Link
               style={{ color: currentPage === "orders" ? "black" : "grey" }}
               onClick={() => setCurrentPage("orders")}
               to="/profile/orders"
@@ -36,7 +36,7 @@ export const UserProfile = () => {
               to="/profile/addresses"
             >
               Addresses
-            </Link>
+            </Link> */}
           </div>
           <Outlet />
         </div>

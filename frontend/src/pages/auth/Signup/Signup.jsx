@@ -60,7 +60,7 @@ export const Signup = () => {
 
         localStorage.setItem("token", data.token);
         localStorage.setItem("isAuth", true);
-        navigate("/");
+        navigate("/questionnaire");
       } else {
         throw new Error(data.detail || "Failed to sign up");
       }

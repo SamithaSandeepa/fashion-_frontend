@@ -1,0 +1,92 @@
+/* Main container to center the profile content, with adjusted styles for a cohesive look */
+.user-profile {
+  font-family: "Arial", sans-serif;
+  max-width: 800px; /* Adjust based on your preference */
+  margin: 40px auto; /* Center the profile with more margin */
+  background-color: #fff;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Updated shadow for a subtle effect */
+  border-radius: 10px; /* Rounded corners for a modern look */
+  padding: 20px; /* Padding inside the container for spacing */
+  box-sizing: border-box; /* Ensures padding does not increase size */
+}
+
+/* Profile section with background and text alignment */
+.profile-section {
+  background-color: #f8d7da;
+  text-align: center;
+  padding: 20px;
+  color: #333;
+}
+
+.profile-photo {
+  width: 150px;
+  height: 150px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 3px solid #fff; /* Highlight the photo with a white border */
+}
+
+/* Styling for the information section and items within it */
+.info-section {
+  background-color: #fdfdfe;
+  padding: 20px;
+  border-top: 2px solid #dee2e6; /* Separates profile and info sections */
+}
+
+.info-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between; /* Ensures label and input align in the same row */
+  margin-bottom: 10px; /* Reduced margin for a tighter layout */
+}
+
+.info-item label {
+  margin-right: 10px; /* Space between label and input */
+  font-weight: bold;
+  text-align: left; /* Aligns text to the left for consistency */
+}
+
+/* Adjusted input fields for clarity and usability */
+.info-item input {
+  width: 75%; /* Adjusts width to ensure it aligns well with the label */
+  border: 1px solid #ccc;
+  padding: 8px;
+  font-size: 16px;
+  border-radius: 5px; /* Maintains rounded corners */
+}
+
+/* Reverted button colors to match the original theme */
+.save,
+.edit,
+.delete {
+  background-color: #c3b1ae; /* Original lighter shade */
+  color: #333; /* Dark text for contrast */
+  border: none;
+  padding: 10px 20px;
+  margin: 5px;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s; /* Smooth transition for hover effects */
+}
+
+.save:hover,
+.edit:hover,
+.delete:hover {
+  background-color: #b39a97; /* Slightly darker on hover for interaction feedback */
+}
+
+/* Responsive adjustments for better mobile viewing */
+@media screen and (max-width: 640px) {
+  .info-item {
+    flex-direction: row; /* Keeps label and input inline on smaller screens */
+    justify-content: start; /* Aligns items to the start for consistency */
+  }
+
+  .info-item label {
+    min-width: 30%; /* Ensures labels do not wrap */
+  }
+
+  .info-item input {
+    width: 70%; /* Adjusts width for mobile screens */
+  }
+}

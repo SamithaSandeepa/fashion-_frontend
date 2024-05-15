@@ -15,4 +15,4 @@ class CustomUserSerializer(serializers.ModelSerializer):
 class UserProfileSerializer(serializers.ModelSerializer):
     class Meta:
         model = UserProfile
-        fields = ('bio', 'phone_number')  # Include all fields from UserProfile
+        fields = '__all__'  # Include all fields from UserProfile
