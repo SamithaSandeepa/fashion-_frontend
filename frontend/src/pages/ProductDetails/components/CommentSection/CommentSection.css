@@ -1,0 +1,43 @@
+/* Styles the entire comment section container for a bit of padding */
+.comment-section {
+    padding: 20px;
+    background-color: #f5f5f5; /* Light grey background */
+    border-radius: 5px; /* Rounded corners */
+  }
+  
+  /* Styles the form within the comment section */
+  .comment-section form {
+    display: flex;
+    flex-direction: column;
+    gap: 10px; /* Adds a gap between form elements */
+  }
+  
+  /* Styles for the input field */
+  .comment-section input[type="text"] {
+    padding: 10px;
+    border: 1px solid #ccc; /* Light grey border */
+    border-radius: 4px; /* Rounded corners for the input */
+    font-size: 16px; /* Larger font size for better readability */
+  }
+  
+  /* Styles for the submit button */
+  .comment-section button[type="submit"] {
+    padding: 10px 20px;
+    background-color: #007bff; /* Bootstrap primary color */
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer; /* Changes cursor to a pointer on hover */
+    font-size: 16px;
+  }
+  
+  /* Hover effect for the button to lighten the background color */
+  .comment-section button[type="submit"]:hover {
+    background-color: #0056b3; /* A slightly darker shade of the primary color */
+  }
+  
+  /* Additional style to improve accessibility */
+  .comment-section button[type="submit"]:focus {
+    outline: 3px solid #ffbf47; /* Adds an outline when the button is focused */
+  }
+  

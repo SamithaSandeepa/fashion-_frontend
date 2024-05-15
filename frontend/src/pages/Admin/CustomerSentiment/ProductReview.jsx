@@ -48,10 +48,11 @@ export const ProductReview = () => {
   // };
 
   return (
-    <div className="product-review">
-      <div className="product-image">
-        <img src={product.imageUrl} alt={product.name} />
+    <div className="product-review" style={{display:'flex' , alignItems:'center'}}>
+      <div className="product-image ">
+        <img src={product.img} alt={product.name} />
       </div>
+      <div style={{display:'flex', flexDirection:'column'}}>
       <div className="product-details">
         <h2>{product.name}</h2>
         <span className="rating">{product.rating} ★</span>
@@ -62,12 +63,14 @@ export const ProductReview = () => {
         <p>Size: {product.size}</p>
       </div>
       <div className="review-analysis">
+        <h3>Review Analysis</h3>
       <button onClick={() => goToReviewPage('positive', product.id)}>Positive Reviews</button>
       <button onClick={() => goToReviewPage('negative', product.id)}>Negative Reviews</button>
       <button onClick={() => goToReviewPage('slightly-positive', product.id)}>Slightly Positive Reviews</button>
       <button onClick={() => goToReviewPage('slightly-negative', product.id)}>Slightly Negative Reviews</button>
       <button onClick={() => goToReviewPage('neutral', product.id)}>Neutral Reviews</button>
       </div>  
+      </div>
     </div>
   );
 };

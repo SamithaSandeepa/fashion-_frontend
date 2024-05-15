@@ -111,7 +111,7 @@ DATABASES = {
         'ENGINE': 'django.db.backends.postgresql',
         'NAME': 'f_store',
         'USER': 'postgres',
-        'PASSWORD': 'Aruni@#996',
+        'PASSWORD': 'Aruni@#99',
         'HOST': 'localhost',  # Set to the address of your database if it's not on your local machine
         'PORT': '5432',       # Default PostgreSQL port
     }
@@ -157,3 +157,4 @@ STATIC_URL = 'static/'
 # https://docs.djangoproject.com/en/4.1/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+X_FRAME_OPTIONS = 'SAMEORIGIN'

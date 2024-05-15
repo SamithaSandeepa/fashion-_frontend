@@ -29,7 +29,7 @@ const processSentimentResults = (results) => {
   results.forEach(result => {
       // Determine the sentiment category and increment its count
       switch (result.predicted_sentiment) {
-          case 'slightly negative':
+          case 'slightly-negative':
               sentimentCounts['Slightly Negative']++;
               break;
           case 'negative':
@@ -41,7 +41,7 @@ const processSentimentResults = (results) => {
           case 'positive':
               sentimentCounts['Positive']++;
               break;
-          case 'slightly positive':
+          case 'slightly-positive':
               sentimentCounts['Slightly Positive']++;
               break;
           default:
@@ -88,7 +88,7 @@ const fetchSentimentData = async (productId) => {
       // Check if the product exists and has comments
       if (product && product.comment) {
           // Arrange comments in the desired structure
-          const clickedProductComments = { comment: product.comment.flat() };
+          const clickedProductComments = { comment: product.comment.flat()};
 
           // Send a POST request to the sentiment analysis API
           const response = await fetch('http://localhost:8000/api/sent/sentiment_analysis', {
@@ -163,10 +163,19 @@ const closeModal = () => {
            {products.map((product, index) => (
           <tr key={index}> {/* Alternatively, if product objects had unique ids, you could use product.id */}
             <td>{product.product_id}</td>
-            <td>
+            {/* <td>
             <button onClick={() => openModal(product.product_id)}>Analysis</button>
               <button onClick={() => navigate(`/product-review/${product.product_id}`)}>Review</button>
+            </td> */}
+            <td className="text-center">
+            <button onClick={() => openModal(product.product_id)} className="analysis-button">
+              <img src={require('./images/Analysis.png')} alt="Analysis" />
+            </button>
+              <button onClick={() => navigate(`/product-review/${product.product_id}`)} className="review-button">
+                <img src={require('./images/review.png')} alt="Review" />
+              </button>
             </td>
+
           </tr>
         ))}
         </tbody>

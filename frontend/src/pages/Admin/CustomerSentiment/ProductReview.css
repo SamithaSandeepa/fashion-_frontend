@@ -8,7 +8,7 @@
   }
   
   .product-image img {
-    max-width: 300px;
+    max-width: 400px;
     margin-right: 20px;
   }
   
@@ -41,4 +41,102 @@
   .review-analysis button:hover {
     background-color: #0056b3;
   }
-    
+  .product-review {
+    display: grid;
+    grid-template-columns: 1fr 2fr; /* Side image and main content area */
+    gap: 20px; /* Space between columns */
+    padding: 20px;
+    background-color: #f5f5f5;
+    align-items: start; /* Align grid items to the start of the row */
+  }
+  
+  .product-image {
+    max-width: 500px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1); /* Soft shadow around the image */
+  }
+  
+  .product-image img {
+    width: 100%;
+    height: auto;
+    display: block; /* Remove default image inline spacing */
+  }
+  
+  .product-details {
+    max-width: 400px;
+    padding: 0 20px; /* Padding around the details for spacing */
+  }
+  
+  .product-details h2 {
+    margin-top: 0;
+    color: #333;
+    font-size: 2em; /* Large text for product title */
+    font-weight: bold; /* Bold font for the title */
+  }
+  
+  .rating {
+    display: inline-block; /* Inline-block for the star rating */
+    font-size: 1.5em;
+    color: #ffd700; /* Gold color for stars */
+    margin-bottom: 10px;
+  }
+  
+  .price {
+    font-size: 2em; /* Larger price font size */
+    color: #333;
+    font-weight: bold; /* Bold font for price */
+  }
+  
+  .review-analysis {
+    display: flex; /* Flex container for the buttons */
+    flex-direction: column; /* Stack them vertically */
+    align-items: flex-start; /* Align buttons to the start */
+  }
+  
+  .review-analysis button {
+    background: none;
+    border: 1px solid #007bff; /* Blue border for buttons */
+    color: #007bff; /* Blue text for buttons */
+    padding: 10px;
+    margin-top: 10px; /* Margin on top of buttons */
+    border-radius: 5px;
+    cursor: pointer;
+    transition: all 0.3s ease; /* Transition for hover effects */
+  }
+  
+  .review-analysis button:hover {
+    background-color: #007bff; /* Blue background on hover */
+    color: rgb(55, 46, 46); /* White text on hover */
+  }
+  .review-analysis {
+    border: 1px solid #cccccc; /* Box border */
+    padding: 20px;
+    margin-top: 20px; /* Space from the product details above */
+    width: 100%; /* Fit to the size of its content */
+  }
+  
+  .review-analysis h3 {
+    text-align: center;
+    font-size: 1.5em; /* Heading size */
+    margin-bottom: 20px; /* Space below the heading */
+  }
+  
+  .review-analysis button {
+    width: 100%; /* Full width of the container */
+    padding: 10px 0; /* Padding top and bottom */
+    margin: 5px 0; /* Margin top and bottom for spacing between buttons */
+    border: none;
+    background-color: #2b2828; /* Light grey background */
+    color: #fffbfb; /* Text color */
+    font-weight: bold; /* Bold text */
+    text-transform: uppercase; /* Uppercase text */
+    cursor: pointer;
+    transition: background-color 0.2s; /* Smooth transition for hover effect */
+  }
+  
+  .review-analysis button:hover {
+    background-color: #e6e6e6; /* Slightly darker grey on hover */
+  }
+  
+  
+  
+ 
