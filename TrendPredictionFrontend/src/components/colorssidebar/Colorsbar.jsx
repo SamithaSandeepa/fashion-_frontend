@@ -50,7 +50,7 @@ function Colorsbar() {
         // formToSend.append('month', formData.month);
         // formToSend.append('year', formData.year);
         // formToSend.append('age', formData.age);
-        // formToSend.append('category', formData.category); // Make sure this matches your state structure
+        // formToSend.append('category', formData.category);
 
         // Convert form data to JSON
         const formToSend = {
