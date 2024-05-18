@@ -19,6 +19,8 @@ import { AdminDashboard } from "../pages/Admin/AdminDashboard";
 import { CustomerSentiment } from "../pages/Admin/CustomerSentiment/CustomerSentiments";
 import {ProductReview} from "../pages/Admin/CustomerSentiment/ProductReview";
 import { Reviewpage } from "../pages/Admin/CustomerSentiment/Reviewpage";
+import { ProductReview } from "../pages/Admin/CustomerSentiment/ProductReview";
+import { Reviewsexplain } from "../pages/Admin/CustomerSentiment/Reviewsexplain";
 import ImageSearch from "../pages/ImageSearch/ImageSearch";
 import { BarGraph } from "../pages/Admin/CustomerSentiment/BarGraph"; // Make sure to import the BarGraph component correctly}
 import { Questionnaire } from "../pages/auth/Signup/Questionnaire";
@@ -77,6 +79,17 @@ export const NavRoutes = () => {
       <Route path="/sentiment-analysis" element={<CustomerSentiment />} />
       <Route path="/product-review/:id" element={<ProductReview />} />
       <Route path="/reviews/:reviewType/:id" element={<Reviewpage />} />
+      <Route path="/negative-reviews/:productId" element={<Reviewsexplain />} />
+      <Route path="/positive-reviews/:productId" element={<Reviewsexplain />} />
+      <Route path="/neutral-reviews/:productId" element={<Reviewsexplain />} />
+      <Route
+        path="/slightly-positive-reviews/:productId"
+        element={<Reviewsexplain />}
+      />
+      <Route
+        path="/slightly-negative-reviews/:productId"
+        element={<Reviewsexplain />}
+      />
       <Route path="/bar-graph" element={<BarGraph />} />
 
       {/* products */}
