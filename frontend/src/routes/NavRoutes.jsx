@@ -25,6 +25,7 @@ import { Questionnaire } from "../pages/auth/Signup/Questionnaire";
 import { UserProfileA } from "../pages/UserProfile/anjalee_profile/UserProfile";
 import { AddProduct } from "../pages/Admin/Product/AddProduct";
 
+
 export const NavRoutes = () => {
   return (
     <Routes>

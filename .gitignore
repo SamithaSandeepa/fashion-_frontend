@@ -3,3 +3,5 @@
 *.pyc
 backend/firebase_credentials-1.json
 backend/firebase_credentials.json
+*.pyc
+*.pyc

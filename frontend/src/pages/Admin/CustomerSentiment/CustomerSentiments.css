@@ -1,29 +1,99 @@
 .customer-sentiments {
-    padding: 20px;
-    background-color: #f5f5f5;
-  }
-  
-  table {
-    width: 100%;
-    border-collapse: collapse;
-    margin-top: 20px;
-  }
-  
-  table, th, td {
-    border: 1px solid #dddddd;
-  }
-  
-  th, td {
-    text-align: left;
-    padding: 8px;
-  }
-  
-  th {
-    background-color: #4CAF50;
-    color: white;
-  }
-  
-  button {
-    cursor: pointer;
-  }
-  
+  padding: 20px;
+  background-color: #f5f5f5;
+  font-family: 'Arial', sans-serif; /* Choose a font that matches your design */
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 20px;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.1); /* Add shadow for depth */
+}
+
+table, th, td {
+  border: 1px solid #dddddd;
+}
+
+th, td {
+  text-align: left;
+  padding: 16px; /* Adjust padding to match your design */
+}
+
+th {
+  background-color: #333; /* Adjust the color to match your design */
+  color: white;
+}
+
+/* Alternate row coloring for better readability */
+tbody tr:nth-child(odd) {
+  background-color: #f9f9f9;
+}
+
+tbody tr:nth-child(even) {
+  background-color: #ffffff;
+}
+
+button {
+  cursor: pointer;
+  background: none; /* Remove default button background */
+  border: none; /* Remove default button border */
+  padding: 8px; /* Add padding */
+  margin-right: 8px; /* Add margin between buttons */
+}
+
+/* Add button hover effect */
+button:hover {
+  background-color: #e6e6e6; /* Light grey background on hover */
+}
+
+/* Use FontAwesome icons for buttons */
+.analysis-button {
+  font-size: 16px; /* Adjust the size of the icon */
+}
+
+.review-button {
+  font-size: 16px; /* Adjust the size of the icon */
+}
+button {
+  cursor: pointer;
+  background: none;
+  border: none;
+  padding: 8px;
+  margin-right: 8px;
+  display: inline-flex; /* Aligns the img within the button */
+  align-items: center; /* Centers the img vertically */
+  justify-content: center; /* Centers the img horizontally */
+}
+
+button img {
+  width: 24px; /* Size of the icon images */
+  height: auto; /* Maintain aspect ratio */
+  display: block;
+}
+
+button:hover {
+  background-color: #e6e6e6;
+}
+
+/* You can still keep your button hover effect */
+.analysis-button:hover {
+  background-color: #e6e6e6;
+}
+
+.review-button:hover {
+  background-color: #e6e6e6;
+}
+
+.customer-sentiments {
+  padding: 20px;
+  background-color: #f5f5f5;
+  /* Other styles */
+}
+
+.customer-sentiments h2 {
+  text-align: center;
+  margin-top: 0;
+  margin-bottom: 1em;
+  /* You can add other styles such as font size, font family, etc., to match your design */
+}
