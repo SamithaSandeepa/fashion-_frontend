@@ -20,7 +20,7 @@ import { CustomerSentiment } from "../pages/Admin/CustomerSentiment/CustomerSent
 import {ProductReview} from "../pages/Admin/CustomerSentiment/ProductReview";
 import { Reviewpage } from "../pages/Admin/CustomerSentiment/Reviewpage";
 // import { ProductReview } from "../pages/Admin/CustomerSentiment/ProductReview";
-import { Reviewsexplain } from "../pages/Admin/CustomerSentiment/Reviewsexplain";
+import { Reviewsexplain } from "../pages/Admin/CustomerSentiment/Reviewsexplain.jsx";
 import ImageSearch from "../pages/ImageSearch/ImageSearch";
 import { BarGraph } from "../pages/Admin/CustomerSentiment/BarGraph"; // Make sure to import the BarGraph component correctly}
 import { Questionnaire } from "../pages/auth/Signup/Questionnaire";
