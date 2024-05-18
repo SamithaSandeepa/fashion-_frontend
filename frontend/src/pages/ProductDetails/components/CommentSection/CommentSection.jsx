@@ -1,40 +1,3 @@
-// import React, { useEffect, useState } from 'react';
-// import './CommentSection.css';
-
-// export const CommentSection = ({selectedProduct}) => {
-//   const [comment, setComment] = useState('');
-//   console.log(selectedProduct);
-
-//   const handleCommentChange = (e) => {
-//     setComment(e.target.value);
-//   };
-//   const handleSubmit = (e) => {
-
-//     e.preventDefault();
-//     // Add your logic to handle the comment submission here
-//     console.log(comment);
-//     setComment('');
-//   };
-
-//   useEffect(() => {
-//   console.log(selectedProduct);
-
-//     }, [selectedProduct]);
-
-//   return (
-//     <div>
-//       <form onSubmit={handleSubmit}>
-//         <input
-//           type="text"
-//           value={comment}
-//           onChange={handleCommentChange}
-//           placeholder="Enter your comment"
-//         />
-//         <button type="submit">Submit</button>
-//       </form>
-//     </div>
-//   );
-// };
 import React, { useEffect, useState } from 'react';
 import './CommentSection.css';
 import Modal from '../../../Admin/CustomerSentiment/Modal';
@@ -103,8 +66,21 @@ export const CommentSection = ({ selectedProduct }) => {
     setShowModal(false);
   };
 
+  // return (
+  //   <div>
+  //     <form onSubmit={handleSubmit}>
+  //       <input
+  //         type="text"
+  //         value={comment}
+  //         onChange={handleCommentChange}
+  //         placeholder="Enter your comment"
+  //       />
+  //       <button type="submit">Submit</button>
+  //     </form>
+  //   </div>
+  // );
   return (
-    <div>
+    <div className="comment-section">
       <form onSubmit={handleSubmit}>
         <input
           type="text"
@@ -114,7 +90,9 @@ export const CommentSection = ({ selectedProduct }) => {
         />
         <button type="submit">Submit</button>
       </form>
+      {showModal && <Modal onClose={handleModalClose} sentimentResults={sentimentResults} />}
     </div>
   );
+
 };
 
