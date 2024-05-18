@@ -41,7 +41,7 @@ function Colors() {
          
         
          {/*<div className="predictvalue">Predicted Value = {predictedValue} </div>*/}
-         <button className="homeBtn" onClick={handleNavigation}>Go Back to the Drashboard</button>
+         <button className="homeBtn" onClick={handleNavigation}>Navigate to Dashboard</button>
           </div>
     </div>
   )
