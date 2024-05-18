@@ -13,6 +13,7 @@ export const CustomerSentiment = () => {
 
 
   const [products, setProducts] = useState([]);
+  console.log(products);
 
     // Function to process sentiment analysis results
 const processSentimentResults = (results) => {
@@ -145,7 +146,7 @@ const closeModal = () => {
           <tr>
             <th>Product Id</th>
             {/* <th>Category</th> */}
-            {/* <th>Product Name</th> */}
+            <th>Product Name</th>
             <th>Action</th>
           </tr>
         </thead>
@@ -163,6 +164,7 @@ const closeModal = () => {
            {products.map((product, index) => (
           <tr key={index}> {/* Alternatively, if product objects had unique ids, you could use product.id */}
             <td>{product.product_id}</td>
+            <td>{product.comment[0].product_name}</td>
             {/* <td>
             <button onClick={() => openModal(product.product_id)}>Analysis</button>
               <button onClick={() => navigate(`/product-review/${product.product_id}`)}>Review</button>

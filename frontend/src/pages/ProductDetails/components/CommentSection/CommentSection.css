@@ -80,7 +80,7 @@
 
 /* Hover effect for the button to lighten the background color */
 .comment-section button[type="submit"]:hover {
-  background-color: #0056b3; /* A slightly darker shade of the primary color */
+  background-color: #5c5e61; /* A slightly darker shade of the primary color */
 }
 
 /* Additional style to improve accessibility */
