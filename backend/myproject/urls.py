@@ -12,7 +12,6 @@ urlpatterns = [
     path('api/sent/', include('sentiment.urls')),
     path('api/store/', include('store.urls')),  # Add this line for the store app
     path('api/comments', include('comments.urls')), 
-    path('api/recom/', include('recommendation.urls')),
 ]
 
 if settings.DEBUG:
