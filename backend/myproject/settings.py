@@ -28,7 +28,12 @@ SECRET_KEY = 'django-insecure-y7#%r@#35i)t8n49lq=bdvhcl$@j#75m%k@hnlv0d204!_yg#l
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = [
+    'localhost',
+    '127.0.0.1',
+    'trendpredictionbackend-uu26.onrender.com',
+    "*",
+]
 
 
 # Application definition
