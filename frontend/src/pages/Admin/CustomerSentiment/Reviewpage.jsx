@@ -6,6 +6,7 @@ import './Reviewpage.css';
 
 export const Reviewpage = () => {
   const { reviewType, id } = useParams();
+  console.log(reviewType, id); // Log the reviewType and id to the console
   const [comments, setComments] = useState([]);
   const [analysis, setAnalysis] = useState('');
   const [loading, setLoading] = useState(true);
@@ -22,7 +23,7 @@ export const Reviewpage = () => {
         console.log(allComments);
         
         // Step 2: Filter comments by product ID
-        const productComments = allComments.find(item => item.product_id === id)?.comment || [];
+        const productComments = allComments.find(item => item.product_id[0] === id)?.comment || [];
         console.log(JSON.stringify({ comment: productComments }));
         
         // Step 3: Send the filtered comments for sentiment analysis

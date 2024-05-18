@@ -22,6 +22,7 @@ export const ProductReview = () => {
           }
           const data = await response.json();
           setProduct(data);
+          console.log(data);
         } catch (error) {
           console.error('There was a problem fetching the product details:', error);
         }

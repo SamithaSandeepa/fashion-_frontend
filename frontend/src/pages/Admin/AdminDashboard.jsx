@@ -13,10 +13,28 @@ import './AdminDashboard.css';
 //     </div>
 //   );
 // };
+// export const AdminDashboard = () => {
+//   return (
+//     <div className="admin-dashboard">
+//       <h2>Admin Dashboard</h2>
+//       <br></br>
+//       <br></br>
+//       <div className="dashboard-buttons">
+//         <Link to="/sentiment-analysis" className="dashboard-link" id="sentiment-analysis-btn">
+//           <span>Customer Sentiments Analysis</span>
+//         </Link>
+//         <Link to="/fashion-trend-analysis" className="dashboard-link" id="fashion-trend-analysis-btn">
+//           <span>Fashion Trends Analysis</span>
+//         </Link>
+//       </div>
+//     </div>
+//   );
+// };
+
 export const AdminDashboard = () => {
   return (
     <div className="admin-dashboard">
-      <h2>Admin Dashboard</h2>
+      <h1>Admin Dashboard</h1>
       <br></br>
       <br></br>
       <div className="dashboard-buttons">
@@ -30,3 +48,4 @@ export const AdminDashboard = () => {
     </div>
   );
 };
+

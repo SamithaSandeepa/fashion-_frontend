@@ -124,6 +124,7 @@ const fetchSentimentData = async (productId) => {
         console.log("response", response)
         const data = await response.json();
         setProducts(data);
+        console.log("data", data);
       } catch (error) {
         console.error('Error fetching data: ', error);
       }
@@ -162,9 +163,10 @@ const closeModal = () => {
             </tr>
           ))} */}
            {products.map((product, index) => (
+            console.log("product", product),
           <tr key={index}> {/* Alternatively, if product objects had unique ids, you could use product.id */}
-            <td>{product.product_id}</td>
-            <td>{product.comment[0].product_name}</td>
+            <td>{product.product_id[0]}</td>
+            <td>{product.product_id[1]}</td>
             {/* <td>
             <button onClick={() => openModal(product.product_id)}>Analysis</button>
               <button onClick={() => navigate(`/product-review/${product.product_id}`)}>Review</button>
@@ -173,7 +175,7 @@ const closeModal = () => {
             <button onClick={() => openModal(product.product_id)} className="analysis-button">
               <img src={require('./images/Analysis.png')} alt="Analysis" />
             </button>
-              <button onClick={() => navigate(`/product-review/${product.product_id}`)} className="review-button">
+              <button onClick={() => navigate(`/product-review/${product.product_id[0]}`)} className="review-button">
                 <img src={require('./images/review.png')} alt="Review" />
               </button>
             </td>
