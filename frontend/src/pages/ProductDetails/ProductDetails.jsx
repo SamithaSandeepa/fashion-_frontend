@@ -22,6 +22,7 @@ export const ProductDetails = () => {
         }
         const data = await response.json();
         setProduct(data);
+        console.log(data);
         console.log(data.id);
       } catch (error) {
         console.error("Error fetching product:", error);
@@ -44,7 +45,8 @@ export const ProductDetails = () => {
         <ProductImage selectedProduct={product} />
         <ProductDescription selectedProduct={product} />
         <div>
-      <CommentSection selectedProduct={product.id}/>
+      <CommentSection selectedProduct={product.id} productName={product.name}/>
+      
     </div>
       </div>
       

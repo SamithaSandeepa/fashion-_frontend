@@ -2,10 +2,12 @@ import React, { useEffect, useState } from 'react';
 import './CommentSection.css';
 import Modal from '../../../Admin/CustomerSentiment/Modal';
 
-export const CommentSection = ({ selectedProduct }) => {
+export const CommentSection = ({ selectedProduct, productName }) => {
   const [comment, setComment] = useState('');
   const [showModal, setShowModal] = useState(false);
   const [sentimentResults, setSentimentResults] = useState([]);
+  console.log(productName);
+  console.log(selectedProduct);
 
   const handleCommentChange = (e) => {
     setComment(e.target.value);
@@ -46,6 +48,7 @@ export const CommentSection = ({ selectedProduct }) => {
         },
         body: JSON.stringify({
           product_id: selectedProduct,
+          product_name: productName,
           comments: comment,
         }),
       });
