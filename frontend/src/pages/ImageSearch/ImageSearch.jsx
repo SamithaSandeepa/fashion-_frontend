@@ -14,7 +14,7 @@ function ImageSearch() {
   const [allProducts, setAllProducts] = useState([]); // State to store all products
   const [filteredProducts, setFilteredProducts] = useState([]);
 
-  console.log(imageSrc, annotatedImage, croppedImages);
+  console.log(croppedImages);
 
   const handleImageChange = (event) => {
     const file = event.target.files[0];
@@ -50,7 +50,6 @@ function ImageSearch() {
         setClassLabels(data.class_labels || []);
         setSelectedImageIndex(null); // Reset selection
         setIsLoading(false); // Stop loading animation
-        console.log(data);
       } catch (error) {
         console.error("Error fetching data:", error);
         setIsLoading(false);
@@ -64,8 +63,9 @@ function ImageSearch() {
 
   const selectImage = (index, label) => {
     setSelectedImageIndex(index);
+    console.log("Selected Image:", index, label);
     const matchingProducts = allProducts.filter((product) =>
-      product.category_name.toLowerCase().includes(label.toLowerCase())
+      product.image_search_label.toLowerCase().includes(label.toLowerCase())
     );
     console.log(label, "Matching Products:", matchingProducts);
     setFilteredProducts(matchingProducts);

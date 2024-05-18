@@ -1,19 +1,19 @@
 import React, { useState } from "react";
-import "./AddProduct.css"; // Assuming you have a CSS file for styling
+import "./AddProduct.css"; 
 
 export const AddProduct = () => {
   const [formData, setFormData] = useState({
     name: "",
+    gender: "",
+    image_search_label: "",
     original_price: "",
     discounted_price: "",
-    category_name: "",
-    is_stock: true,
-    rating: 0,
-    reviews: 0,
+    fashion_style: "",
+    fashion_brand: "",
+    cloth_type: "",
+    garment_fitting: "",
     description: "",
-    trending: false,
-    size: 0,
-    img_url: null, // Assuming you have an input for image upload
+    img_url: null,
   });
 
   const handleChange = (e) => {
@@ -44,6 +44,7 @@ export const AddProduct = () => {
       }
 
       const data = await response.json();
+      console.log(data)
       console.log("Product added successfully:", data);
       // Optionally, you can redirect or show a success message here
     } catch (error) {
@@ -68,6 +69,61 @@ export const AddProduct = () => {
           />
         </div>
         <div className="form-group">
+          <label htmlFor="gender">Gender:</label>
+          <select
+            id="gender"
+            name="gender"
+            value={formData.gender}
+            onChange={handleChange}
+          >
+            <option value="">Select Gender</option>
+            <option value="Male">Male</option>
+            <option value="Female">Female</option>
+          </select>
+        </div>
+        <div className="form-group">
+        <label htmlFor="image_search_label">Image Search Label:</label>
+          <select
+            id="image_search_label"
+            name="image_search_label"
+            value={formData.image_search_label}
+            onChange={handleChange}
+          >
+            <option value="">Select Image Search Label</option>
+            <option value="Women_Activewear_Legging">Women Activewear Legging</option>
+            <option value="Women_Activewear_Top">Women Activewear Top</option>
+            <option value="Women_Dress_Casual">Women Dress Casual</option>
+            <option value="Women_Dress_Summer">Women Dress Summer</option>
+            <option value="Women_Top_Tshirt">Women Top Tshirt</option>
+            <option value="Women_Top_Croptop">Women Top Croptop</option>
+            <option value="Women_Top_Blouse">Women Top Blouse</option>
+            <option value="Women_Botom_Skirt">Women Bottom Skirt</option>
+            <option value="Women_Bottom_Pant">Women Bottom Pant</option>
+            <option value="Women_Bottom_Short">Women Bottom Short</option>
+            <option value="Women_Outwear_Jacket">Women Outerwear Jacket</option>
+            <option value="Women_Outwear_Coat">Women Outerwear Coat</option>
+            <option value="Women_Outwear_Cardigan">Women Outerwear Cardigan</option>
+            <option value="Women_Suit_Skirtsuit">Women Suit Skirtsuit</option>
+            <option value="Women_Suit_Pantsuit">Women Suit Pantsuit</option>
+            <option value="Women_Swimwear_One-peiceswimsuit">Women Swimwear One-piece Swimsuit</option>
+            <option value="Women_swimwear_swimcover">Women Swimwear Swim Cover</option>
+            <option value="Men_Top_Tshirt">Men Top Tshirt</option>
+            <option value="Men_Top_Poloshirt">Men Top Poloshirt</option>
+            <option value="Men_Top_Dressshirt">Men Top Dressshirt</option>
+            <option value="Men_Top_Sweater">Men Top Sweater</option>
+            <option value="Men_Bottom_Trouser">Men Bottom Trouser</option>
+            <option value="Men_Bottom_Short">Men Bottom Short</option>
+            <option value="Men_Outwear_Jacket">Men Outerwear Jacket</option>
+            <option value="Men_Outwear_Windbreaker">Men Outerwear Windbreaker</option>
+            <option value="Men_Outwear_Vests">Men Outerwear Vests</option>
+            <option value="Men_Suit_Businesssuit">Men Suit Business Suit</option>
+            <option value="Men_Suit_Blazer">Men Suit Blazer</option>
+            <option value="Men_Activewear_Top">Men Activewear Top</option>
+            <option value="Men_Activewear_Pant">Men Activewear Pant</option>
+            <option value="Men_Swimwear_Swimtrunk">Men Swimwear Swimtrunk</option>
+          </select>
+        </div>
+        <div className="form-group">
           <label htmlFor="original_price">Original Price:</label>
           <input
             type="number"
@@ -87,46 +143,60 @@ export const AddProduct = () => {
             onChange={handleChange}
           />
         </div>
-
         <div className="form-group">
-          <label htmlFor="category_name">Category:</label>
-          <input
-            type="text"
-            id="category_name"
-            name="category_name"
-            value={formData.category_name}
+          <label htmlFor="fashion_style">Fashion Style:</label>
+          <select
+            id="fashion_style"
+            name="fashion_style"
+            value={formData.fashion_style}
             onChange={handleChange}
-          />
+          >
+            <option value="">Select Fashion Style</option>
+            <option value="Casual">Casual</option>
+            <option value="Formal">Formal</option>
+            <option value="Minimalist">Minimalist</option>
+            <option value="Sporty">Sporty</option>
+            <option value="Vintage">Vintage</option>
+            <option value="Other">Other</option>
+          </select>
         </div>
         <div className="form-group">
-          <label htmlFor="is_stock">In Stock:</label>
-          <input
-            type="checkbox"
-            id="is_stock"
-            name="is_stock"
-            checked={formData.is_stock}
+          <label htmlFor="fashion_brand">Fashion Brand:</label>
+          <select
+            id="fashion_brand"
+            name="fashion_brand"
+            value={formData.fashion_brand}
             onChange={handleChange}
-          />
+          >
+            <option value="">Select Fashion Brand</option>
+            <option value="Gucci">Gucci</option>
+            <option value="H&M">H&M</option>
+            <option value="Zara">Zara</option>
+            <option value="Adidas">Adidas</option>
+            <option value="Nike">Nike</option>
+            <option value="No Brand">No Brand</option>
+            <option value="Other">Other</option>
+          </select>
         </div>
         <div className="form-group">
-          <label htmlFor="rating">Rating:</label>
-          <input
-            type="number"
-            id="rating"
-            name="rating"
-            value={formData.rating}
+          <label htmlFor="cloth_type">Cloth Type:</label>
+          <select
+            id="cloth_type"
+            name="cloth_type"
+            value={formData.cloth_type}
             onChange={handleChange}
-          />
-        </div>
-        <div className="form-group">
-          <label htmlFor="reviews">Reviews:</label>
-          <input
-            type="number"
-            id="reviews"
-            name="reviews"
-            value={formData.reviews}
-            onChange={handleChange}
-          />
+          >
+            <option value="">Select Cloth Type</option>
+            <option value="Dresses">Dresses</option>
+            <option value="Tops">Tops</option>
+            <option value="Skirt">Skirt</option>
+            <option value="Shirt">Shirt</option>
+            <option value="Bottoms">Bottoms</option>
+            <option value="Trouser">Trouser</option>
+            <option value="Footwear">Footwear</option>
+            <option value="T-shirt">T-shirt</option>
+            <option value="Other">Other</option>
+          </select>
         </div>
         <div className="form-group">
           <label htmlFor="description">Description:</label>
@@ -138,24 +208,20 @@ export const AddProduct = () => {
           ></textarea>
         </div>
         <div className="form-group">
-          <label htmlFor="trending">Trending:</label>
-          <input
-            type="checkbox"
-            id="trending"
-            name="trending"
-            checked={formData.trending}
+          <label htmlFor="garment_fitting">Garment Fitting:</label>
+          <select
+            id="garment_fitting"
+            name="garment_fitting"
+            value={formData.garment_fitting}
             onChange={handleChange}
-          />
-        </div>
-        <div className="form-group">
-          <label htmlFor="size">Size:</label>
-          <input
-            type="number"
-            id="size"
-            name="size"
-            value={formData.size}
-            onChange={handleChange}
-          />
+          >
+            <option value="">Select Garment Fitting</option>
+            <option value="Slim Fit">Slim Fit</option>
+            <option value="Regular Fit">Regular Fit</option>
+            <option value="Classic Fit">Classic Fit</option>
+            <option value="Baggy">Baggy</option>
+            <option value="Other">Other</option>
+          </select>
         </div>
         <div className="form-group">
           <label htmlFor="img_url">Product Image:</label>
@@ -166,7 +232,6 @@ export const AddProduct = () => {
             onChange={handleChange}
           />
         </div>
-
         <div className="form-group">
           <button type="submit">Add Product</button>
         </div>

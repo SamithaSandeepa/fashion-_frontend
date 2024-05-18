@@ -1,4 +1,4 @@
-# Enhancing Fashion Intelligence for Exceptional Customer Experience
+![image](https://github.com/SamithaSandeepa/fashion-_frontend/assets/100958100/e16355e5-b04e-42a1-bbed-02faf2eaada4)# Enhancing Fashion Intelligence for Exceptional Customer Experience
 
 ## Overview
 "Enhancing Fashion Intelligence for Exceptional Customer Experience" develops an integrated AI-driven e-commerce platform designed to personalize the shopping experience. By incorporating fashion object detection, recommendation systems, trend prediction, and sentiment analysis, our system offers a nuanced understanding of consumer preferences and market trends. Aimed at revolutionizing the fashion industry, this platform seeks to bridge the gap between consumers and sellers, providing insights into fashion trends, and facilitating a more engaging online shopping experience.
@@ -10,10 +10,15 @@
 - **Sentiment Analysis**: Integrates NLP and Explainable AI for a deep analysis of customer feedback, aiding in the refinement of product offerings.
 
 ## Team Members
-- Member 1: 
-- Member 2: 
-- Member 3: 
-- Member 4: 
+- Member 1: Perera A.P.S.S.​
+- Member 2: Gunasekara P.G.A.I.P
+- Member 3: Hettiarachchi A.B
+- Member 4: Jayasekara H.L
 
 ### Prerequisites
-List the required software, libraries, and other tools needed to run this project, e.g., Python 3.8+, TensorFlow, etc.
+Python 3.8+
+PyCharm
+React
+TensorFlow
+Django
+Postgresql
