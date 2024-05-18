@@ -6,6 +6,7 @@
   border-radius: 8px;
   background-color: #ffffff;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  font-family: 'Roboto', sans-serif;
 }
 
 .product-form {
@@ -30,7 +31,7 @@
   top: 20px; /* Adjusted to align with padding */
   bottom: 20px; /* Adjusted to align with padding */
   left: 50%;
-  border-left: 1px solid black;
+  border-left: 1px solid #e0e0e0;
   transform: translateX(-50%);
 }
 
@@ -43,6 +44,7 @@
 }
 
 .product-form input,
+.product-form select,
 .product-form textarea,
 .product-form button {
   padding: 12px;
@@ -51,23 +53,34 @@
   width: 100%;
   box-sizing: border-box;
   font-size: 14px;
+  transition: border-color 0.3s, box-shadow 0.3s;
+}
+
+.product-form input:focus,
+.product-form select:focus,
+.product-form textarea:focus {
+  border-color: #000000;
+  box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
 }
 
 .product-form textarea {
   height: 120px; /* Larger text area for better appearance in double-column layout */
+  resize: vertical;
 }
 
 .product-form button {
-  background-color: #007bff;
+  background-color: #000000;
   color: #ffffff;
   cursor: pointer;
   font-size: 16px;
   font-weight: 500;
   border: none;
+  transition: background-color 0.3s, box-shadow 0.3s;
 }
 
 .product-form button:hover {
-  background-color: #0056b3;
+  background-color: #000000;
+  box-shadow: 0 2px 4px rgba(0, 91, 179, 0.2);
 }
 
 /* Styling checkboxes similarly */
@@ -103,10 +116,12 @@
   background: #fff;
   border-radius: 2px;
   box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.1);
+  transition: background 0.3s, box-shadow 0.3s;
 }
 
 .checkbox-custom:checked + .checkbox-custom-label:before {
   background: #007bff;
+  box-shadow: 0 2px 4px rgba(0, 123, 255, 0.2);
 }
 
 .checkbox-custom:checked + .checkbox-custom-label:after {
@@ -118,4 +133,35 @@
   height: 8px;
   background: #fff;
   border-radius: 2px;
+}
+
+/* Add some hover effects */
+.product-form input:hover,
+.product-form select:hover,
+.product-form textarea:hover {
+  border-color: #007bff;
+}
+
+/* Add some spacing between columns */
+.form-group:nth-child(2n) {
+  padding-right: 10px;
+}
+
+.form-group:nth-child(2n-1) {
+  padding-left: 10px;
+}
+
+/* Add a subtle background color to input fields */
+.product-form input,
+.product-form select,
+.product-form textarea {
+  background-color: #f9f9f9;
+}
+
+/* Style for form title */
+.add-product-container h1 {
+  font-size: 2em;
+  margin-bottom: 20px;
+  color: #000000;
+  text-align: center;
 }
