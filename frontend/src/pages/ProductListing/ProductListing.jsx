@@ -4,11 +4,23 @@ import { Filter } from "./components/Filter/Filter";
 import { ProductListingSection } from "./components/ProductListingSection/ProductListingSection";
 import "./ProductListing.css";
 
+// Utility function to shuffle an array
+const shuffleArray = (array) => {
+  for (let i = array.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [array[i], array[j]] = [array[j], array[i]];
+  }
+  return array;
+};
+
 export const ProductListing = ({ products: propProducts }) => {
   const [loading, setLoading] = useState(false);
   const [products, setProducts] = useState([]);
   const [recommendations, setRecommendations] = useState([]);
   const location = useLocation();
+  const [gender, setGender] = useState("");
+  const [recommendedProducts, setRecommendedProducts] = useState([]);
+  const [otherProducts, setOtherProducts] = useState([]);
 
   useEffect(() => {
     const fetchProducts = async () => {
@@ -48,7 +60,8 @@ export const ProductListing = ({ products: propProducts }) => {
             }
           );
           const profileData = await profileResponse.json();
-          console.log("Profile Data:", profileData);
+          console.log("profileData", profileData);
+          setGender(profileData.gender);
 
           const requestData = {};
 
@@ -105,9 +118,7 @@ export const ProductListing = ({ products: propProducts }) => {
             "60+": "Age Category_60+",
           };
           requestData[ageGroupMap[profileData.ageGroup]] = 1;
-
-          console.log("Request Data:", requestData);
-
+          console.log("requestData", requestData);
           const recommendResponse = await fetch(
             "http://localhost:8000/api/recom/predict-fashion/",
             {
@@ -120,8 +131,8 @@ export const ProductListing = ({ products: propProducts }) => {
             }
           );
           const recommendationData = await recommendResponse.json();
-          console.log("Recommendation Data:", recommendationData);
           setRecommendations(recommendationData);
+          console.log("recommendationData", recommendationData);
         } catch (error) {
           console.error("Error fetching recommendations:", error);
         }
@@ -134,33 +145,45 @@ export const ProductListing = ({ products: propProducts }) => {
 
   useEffect(() => {
     if (recommendations.length > 0 && products.length > 0) {
-      const recommendedProducts = products.filter((product) =>
-        recommendations.some((recommendation) =>
-          product.description.includes(recommendation)
-        )
+      const recProducts = products.filter((product) =>
+        recommendations.some((recommendation) => {
+          const [column, value] = recommendation.split(" ");
+          if (product.gender === gender) {
+            switch (column) {
+              case "fashion_style":
+                return product.fashion_style === value;
+              case "fashion_brand":
+                return product.fashion_brand === value;
+              case "cloth_type":
+                return product.cloth_type === value;
+              case "garment_fitting":
+                return product.garment_fitting === value;
+              default:
+                return false;
+            }
+          }
+        })
       );
-      const otherProducts = products.filter(
-        (product) =>
-          !recommendations.some((recommendation) =>
-            product.description.includes(recommendation)
-          )
+
+      const othProducts = products.filter(
+        (product) => !recProducts.includes(product)
       );
-      const sortedProducts = [...recommendedProducts, ...otherProducts];
-      if (JSON.stringify(sortedProducts) !== JSON.stringify(products)) {
-        setProducts(sortedProducts);
-      }
+
+      setRecommendedProducts(shuffleArray(recProducts));
+      setOtherProducts(shuffleArray(othProducts));
     }
-  }, [recommendations, products]);
+  }, [recommendations, products, gender]);
 
   return loading ? (
     <div>Loading...</div>
   ) : (
     <div className="page-container">
       <Filter className="filters" />
-      <ProductListingSection
-        className="products-container"
-        products={products}
-      />
+      <div className="products-container">
+        <ProductListingSection products={recommendedProducts} />
+        {recommendedProducts.length > 0 && <hr className="separator" />}
+        <ProductListingSection products={otherProducts} />
+      </div>
     </div>
   );
 };

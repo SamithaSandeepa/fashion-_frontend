@@ -188,7 +188,7 @@ export const AddProduct = () => {
             <option value="Zara">Zara</option>
             <option value="Adidas">Adidas</option>
             <option value="Nike">Nike</option>
-            <option value="No Brand">No Brand</option>
+            <option value="No_Brand">No Brand</option>
             <option value="Other">Other</option>
           </select>
         </div>
@@ -230,9 +230,9 @@ export const AddProduct = () => {
             onChange={handleChange}
           >
             <option value="">Select Garment Fitting</option>
-            <option value="Slim Fit">Slim Fit</option>
-            <option value="Regular Fit">Regular Fit</option>
-            <option value="Classic Fit">Classic Fit</option>
+            <option value="Slim_Fit">Slim Fit</option>
+            <option value="Regular_Fit">Regular Fit</option>
+            <option value="Classic_Fit">Classic Fit</option>
             <option value="Baggy">Baggy</option>
             <option value="Other">Other</option>
           </select>
