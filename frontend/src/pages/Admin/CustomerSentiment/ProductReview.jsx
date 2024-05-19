@@ -42,7 +42,7 @@ export const ProductReview = () => {
       <div className="product-details">
         <h2>{product.name}</h2>
         <span className="rating">{product.rating} ★★★★</span>(reviews)
-        <p className="price">$ {product.discounted_price} </p>
+        <p className="price">Rs {product.discounted_price} </p>
         <p><strong>Description :</strong> {product.description}</p>
         <p><strong>Type:</strong> {product.cloth_type}</p>
         <p><strong>Gender:</strong> {product.gender}</p>
