@@ -75,9 +75,11 @@ export const ProductListingSection = ({ products: propProducts }) => {
                     {product.reviews} reviews)
                   </p>
                   <div className="price-container">
-                    <p className="original-price">${product.original_price}</p>
+                    <p className="original-price">
+                      Rs {product.original_price}
+                    </p>
                     <p className="discount-price">
-                      ${product.discounted_price}
+                      Rs {product.discounted_price}
                     </p>
                   </div>
                   <p>Gender: {product.gender}</p>

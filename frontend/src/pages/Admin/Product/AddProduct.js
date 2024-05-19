@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import "./AddProduct.css";
 
 export const AddProduct = () => {
-  const [formData, setFormData] = useState({
+  const initialFormData = {
     name: "",
     gender: "",
     image_search_label: "",
@@ -14,7 +14,9 @@ export const AddProduct = () => {
     garment_fitting: "",
     description: "",
     img_url: null,
-  });
+  };
+
+  const [formData, setFormData] = useState(initialFormData);
 
   const handleChange = (e) => {
     const { name, value, type, checked, files } = e.target;
@@ -46,10 +48,11 @@ export const AddProduct = () => {
       const data = await response.json();
       console.log(data);
       console.log("Product added successfully:", data);
-      // Optionally, you can redirect or show a success message here
+
+      // Clear the form inputs
+      setFormData(initialFormData);
     } catch (error) {
       console.error("Error adding product:", error.message);
-      // Handle error, show error message, etc.
     }
   };
 
