@@ -89,7 +89,7 @@ export const CommentSection = ({ selectedProduct, productName }) => {
           type="text"
           value={comment}
           onChange={handleCommentChange}
-          placeholder="Enter your comment"
+          placeholder="Leave a comment here..."
         />
         <button type="submit">Submit</button>
       </form>
