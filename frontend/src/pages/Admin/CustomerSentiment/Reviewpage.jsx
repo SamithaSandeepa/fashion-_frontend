@@ -129,7 +129,11 @@ export const Reviewpage = () => {
           <h2> ADMIN </h2>
         </div>
         <ul className="sidebar-list">
-          <li className="sidebar-item">Dashboard</li>
+          <li className="sidebar-item">
+            <a href="http://localhost:3000/" style={{ color: 'inherit', textDecoration: 'none' }}>
+              Home
+            </a>
+          </li>
           <li className="sidebar-item">Users</li>
           <li className="sidebar-item">Colors</li>
           <li className="sidebar-item">Prints</li>
@@ -143,7 +147,11 @@ export const Reviewpage = () => {
           <li className="sidebar-item">Logs</li>
           <li className="sidebar-item">Settings</li>
           <li className="sidebar-subheader">User</li>
-          <li className="sidebar-item">Profile</li>
+          <li className="sidebar-item">
+            <a href="http://localhost:3000/profile" style={{ color: 'inherit', textDecoration: 'none' }}>
+              Profile
+            </a>
+          </li>
           <li className="sidebar-item">Logout</li>
         </ul>
       </div>
