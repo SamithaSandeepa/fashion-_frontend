@@ -22,6 +22,21 @@ export const ProductListing = ({ products: propProducts }) => {
   const [gender, setGender] = useState("");
   const [recommendedProducts, setRecommendedProducts] = useState([]);
   const [otherProducts, setOtherProducts] = useState([]);
+  const [filters, setFilters] = useState({
+    sort: "",
+  });
+
+  const applyFilters = (products) => {
+    return products.sort((a, b) => {
+      // Sort by price
+      if (filters.sort === "highToLow") {
+        return b.original_price - a.original_price;
+      } else if (filters.sort === "lowToHigh") {
+        return a.original_price - b.original_price;
+      }
+      return 0;
+    });
+  };
 
   useEffect(() => {
     const fetchProducts = async () => {
@@ -191,15 +206,25 @@ export const ProductListing = ({ products: propProducts }) => {
     }
   }, [recommendations, products, gender]);
 
+  // Fetch categories for filters
+  const categories = [
+    ...new Set(products.map((product) => product.category_name)),
+  ];
+
   return loading ? (
     <Loader loading={loading} />
   ) : (
     <div className="page-container">
-      <Filter className="filters" />
+      <Filter
+        className="filters"
+        filters={filters}
+        setFilters={setFilters}
+        categories={categories}
+      />
       <div className="products-container">
-        <ProductListingSection products={recommendedProducts} />
+        <ProductListingSection products={applyFilters(recommendedProducts)} />
         {recommendedProducts.length > 0 && <hr className="separator" />}
-        <ProductListingSection products={otherProducts} />
+        <ProductListingSection products={applyFilters(otherProducts)} />
       </div>
     </div>
   );

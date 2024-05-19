@@ -4,7 +4,6 @@ import Tilt from "react-parallax-tilt";
 import { Link } from "react-router-dom";
 import { BsFillStarFill } from "react-icons/bs";
 import { SyncLoader } from "react-spinners";
-import { Loader } from "../../../../components/Loader/Loader";
 
 export const ProductListingSection = ({ products: propProducts }) => {
   const [localProducts, setLocalProducts] = useState([]);
@@ -30,12 +29,11 @@ export const ProductListingSection = ({ products: propProducts }) => {
       } catch (error) {
         console.error("Error fetching products:", error);
       } finally {
-        // Stop loading after fetching
+        setIsLoading(false); // Stop loading after fetching
       }
     };
 
     fetchProducts();
-    setIsLoading(false);
   }, [propProducts]);
 
   const products = propProducts || localProducts;
