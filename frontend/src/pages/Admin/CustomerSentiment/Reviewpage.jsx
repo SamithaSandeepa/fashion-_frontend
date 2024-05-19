@@ -96,7 +96,7 @@ export const Reviewpage = () => {
 
   return (
     <div className="review-page">
-      <h1>Review Page</h1>
+      <h1>{reviewType} review page</h1>
       <p>Product ID: {id}</p>
       {/* Iterate through comments and display them */}
       <ul>

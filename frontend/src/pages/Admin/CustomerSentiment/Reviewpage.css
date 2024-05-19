@@ -110,3 +110,15 @@
   .review-page {
     text-align: center;
   }
+  .review-page {
+    background-image: url('./images/watermark.png'); /* Path to your image */
+    background-size: cover; /* Adjust as needed */
+    background-repeat: no-repeat;
+    background-position: center;
+    opacity: 0.5; /* Adjust the opacity to make it look like a watermark */
+    min-height: 100vh; /* Ensure the page takes at least the full viewport height */
+    color: #000; /* Adjust text color for better readability over the watermark */
+    position: relative; /* Ensure content is positioned properly */
+    z-index: 1; /* Ensure content is above the background */
+    padding: 20px; /* Add padding to prevent content from touching the edges */
+}
