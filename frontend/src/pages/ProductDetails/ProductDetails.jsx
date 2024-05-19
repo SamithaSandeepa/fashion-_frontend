@@ -50,8 +50,7 @@ export const ProductDetails = () => {
     </div>
       </div>
       
-    )
-    
+    ) 
 
   );
 };

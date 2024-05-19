@@ -3,6 +3,10 @@
   flex-flow: column nowrap;
   align-items: center;
   margin-top: 20px;
+  padding: 20px;
+  max-width: 1200px;
+  margin: auto;
+  flex-direction: column;
 }
 
 @media (min-width: 768px) {
