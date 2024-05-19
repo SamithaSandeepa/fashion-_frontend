@@ -32,6 +32,7 @@ export const AuthProvider = ({ children }) => {
       });
 
       const data = await response.json();
+      console.log(data);
 
       if (response.ok) {
         const { token } = data;
@@ -39,7 +40,11 @@ export const AuthProvider = ({ children }) => {
         setAuth({ isAuth: true, token });
 
         toast.success(`Welcome back, ${username}!`);
-        navigate(location.state?.from?.pathname || "/");
+        if (data.user_type === 2) {
+          navigate("/admin");
+        } else {
+          navigate(location.state?.from?.pathname || "/");
+        }
       } else {
         throw new Error(data.detail || "Login failed");
       }

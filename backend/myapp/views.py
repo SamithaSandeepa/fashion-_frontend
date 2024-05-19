@@ -26,7 +26,8 @@ class LoginView(views.APIView):
 
         if user:
             token, _ = Token.objects.get_or_create(user=user)
-            return Response({"token": token.key})
+            user_type = user.user_type if hasattr(user, 'user_type') else None
+            return Response({"token": token.key, "user_type": user_type})
         else:
             return Response({"error": "Wrong Credentials"}, status=status.HTTP_400_BAD_REQUEST)
         
