@@ -181,6 +181,7 @@ class PredictFashionView(APIView):
             'garment_fitting Baggy', 'garment_fitting Classic Fit', 'garment_fitting Other', 'garment_fitting Regular Fit', 'garment_fitting Slim_Fit'
         ]
 
+
         # Decode the prediction
         predicted_classes = decode_prediction(predicted_values, target_columns)
         print("Predicted Classes:", predicted_classes)
