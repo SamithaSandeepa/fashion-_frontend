@@ -13,4 +13,17 @@
   height: 1px;
   background: #ccc;
   margin: 20px 0;
+  border-bottom: 3px solid #ccc;
+}
+
+.products-container h2 {
+  font-size: 2rem; /* Adjust the size as needed */
+  color: #333; /* Change color to fit your theme */
+  text-align: left; /* Center-align the text */
+  margin: 20px 0; /* Add some space above and below */
+  font-family: "Arial", sans-serif; /* Choose a suitable font */
+  font-weight: bold; /* Make the text bold */
+  text-transform: uppercase; /* Make the text uppercase */
+  border-bottom: 2px solid #ccc; /* Add a bottom border */
+  padding-bottom: 10px; /* Add some padding below the text */
 }

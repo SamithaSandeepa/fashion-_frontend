@@ -222,7 +222,9 @@ export const ProductListing = ({ products: propProducts }) => {
         categories={categories}
       />
       <div className="products-container">
+        <h2>Recommended For You</h2>
         <ProductListingSection products={applyFilters(recommendedProducts)} />
+
         {recommendedProducts.length > 0 && <hr className="separator" />}
         <ProductListingSection products={applyFilters(otherProducts)} />
       </div>
