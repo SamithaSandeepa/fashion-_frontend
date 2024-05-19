@@ -1,191 +1,189 @@
 /* Overall page layout and elements */
 .review-page {
-    font-family: 'Arial', sans-serif;
-    padding: 20px;
-  }
-  
-  .review-page h1 {
-    text-align: center;
-    margin-bottom: 20px;
-  }
-  
-  .review-page p {
-    text-align: center;
-    font-size: 1em;
-    margin-bottom: 20px;
-  }
-  
-  /* Styles for the comments list */
-  ul {
-    list-style-type: none;
-    padding: 0;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-  }
-  
-  ul button {
-    background-color: #f1f7f7;
-    color: rgb(2, 2, 2);
-    border: none;
-    border-radius: 5px;
-    padding: 10px 20px;
-    margin: 5px 0;
-    cursor: pointer;
-    transition: background-color 0.2s ease-in-out;
-  }
-  
-  ul button:hover {
-    background-color: #c8d0da;
-  }
-  
-  /* Loading state */
-  .loading {
-    text-align: center;
-  }
-  
-  /* Modal overlay */
-  .modal-overlay {
-    position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background-color: rgba(0, 0, 0, 0.5);
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    z-index: 1000; /* High z-index to ensure it's above other content */
-  }
-  
-  /* Modal content */
-  .modal-content {
-    background-color: #fff;
-    padding: 20px;
-    border-radius: 8px;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    width: 90%;
-    max-width: 500px; /* Adjust the max-width as per your design */
-  }
-  
-  .modal-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 20px;
-  }
-  
-  .modal-title {
-    margin: 0;
-  }
-  
-  .close-button {
-    background: none;
-    border: none;
-    font-size: 1.5em;
-    cursor: pointer;
-  }
-  
-  .modal-body {
-    text-align: center;
-  }
-  
-  .modal-body button {
-    background-color: #28a745;
-    color: rgb(1, 1, 1);
-    padding: 10px 15px;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-  }
-  
-  .modal-body button:hover {
-    background-color: #218838;
-  }
-  .review-page h1 {
-    text-align: center;
-    margin-top: 20px;
-    margin-bottom: 20px;
-  }
-  .review-page {
-    text-align: center;
-  }
- 
+  font-family: "Arial", sans-serif;
+  padding: 20px;
+}
 
-  .review-page-container {
-    display: flex;
-  }
-  
-  .sidebar {
-    width: 250px;
-    background-color: #333;
-    color: white;
-    padding: 20px;
-  }
-  
-  .sidebar-header {
-    font-size: 24px;
-    margin-bottom: 20px;
-  }
-  
-  .sidebar-list {
-    list-style: none;
-    padding: 0;
-  }
-  
-  .sidebar-item {
-    margin: 10px 0;
-    cursor: pointer;
-  }
-  
-  .sidebar-subheader {
-    margin-top: 20px;
-    font-size: 18px;
-  }
-  
-  .review-page-content {
-    flex-grow: 1;
-    padding: 20px;
-  }
-  
-  .modal-overlay {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: rgba(0, 0, 0, 0.7);
-    display: flex;
-    justify-content: center;
-    align-items: center;
-  }
-  
-  .modal-content {
-    background: white;
-    padding: 20px;
-    border-radius: 5px;
-    width: 500px;
-    max-width: 90%;
-  }
-  
-  .modal-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-  }
-  
-  .modal-title {
-    margin: 0;
-  }
-  
-  .close-button {
-    background: none;
-    border: none;
-    font-size: 24px;
-    cursor: pointer;
-  }
-  
-  .modal-body {
-    margin-top: 10px;
-  }
-  
+.review-page h1 {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.review-page p {
+  text-align: center;
+  font-size: 1em;
+  margin-bottom: 20px;
+}
+
+/* Styles for the comments list */
+ul {
+  list-style-type: none;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+ul button {
+  background-color: #f1f7f7;
+  color: rgb(2, 2, 2);
+  border: none;
+  border-radius: 5px;
+  padding: 10px 20px;
+  margin: 5px 0;
+  cursor: pointer;
+  transition: background-color 0.2s ease-in-out;
+}
+
+ul button:hover {
+  background-color: #c8d0da;
+}
+
+/* Loading state */
+.loading {
+  text-align: center;
+}
+
+/* Modal overlay */
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000; /* High z-index to ensure it's above other content */
+}
+
+/* Modal content */
+.modal-content {
+  background-color: #fff;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  width: 90%;
+  max-width: 500px; /* Adjust the max-width as per your design */
+}
+
+.modal-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.modal-title {
+  margin: 0;
+}
+
+.close-button {
+  background: none;
+  border: none;
+  font-size: 1.5em;
+  cursor: pointer;
+}
+
+.modal-body {
+  text-align: center;
+}
+
+.modal-body button {
+  background-color: #28a745;
+  color: rgb(1, 1, 1);
+  padding: 10px 15px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.modal-body button:hover {
+  background-color: #218838;
+}
+.review-page h1 {
+  text-align: center;
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
+.review-page {
+  text-align: center;
+}
+
+.review-page-container {
+  display: flex;
+}
+
+.sidebar {
+  width: 250px;
+  background-color: #333;
+  color: white;
+  padding: 20px;
+}
+
+.sidebar-header {
+  font-size: 24px;
+  margin-bottom: 20px;
+}
+
+.sidebar-list {
+  list-style: none;
+  padding: 0;
+}
+
+.sidebar-item {
+  margin: 10px 0;
+  cursor: pointer;
+}
+
+.sidebar-subheader {
+  margin-top: 20px;
+  font-size: 18px;
+}
+
+.review-page-content {
+  flex-grow: 1;
+  padding: 20px;
+}
+
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.7);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.modal-content {
+  background: white;
+  padding: 20px;
+  border-radius: 5px;
+  width: 500px;
+  max-width: 90%;
+}
+
+.modal-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.modal-title {
+  margin: 0;
+}
+
+.close-button {
+  background: none;
+  border: none;
+  font-size: 24px;
+  cursor: pointer;
+}
+
+.modal-body {
+  margin-top: 10px;
+}

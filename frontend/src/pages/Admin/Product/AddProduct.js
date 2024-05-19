@@ -138,6 +138,7 @@ export const AddProduct = () => {
             <option value="Men_Swimwear_Swimtrunk">
               Men Swimwear Swimtrunk
             </option>
+            <option value="Other">Other</option>
           </select>
         </div>
         <div className="form-group">
