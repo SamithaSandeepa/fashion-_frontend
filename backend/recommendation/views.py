@@ -178,7 +178,7 @@ class PredictFashionView(APIView):
             'fashion_brand Nike', 
             'fashion_brand No_Brand', 'fashion_brand Other', 'fashion_brand Zara',
             'cloth_type Bottoms', 'cloth_type Dresses', 'cloth_type Footwear', 'cloth_type Type_Other', 'cloth_type Shirt', 'cloth_type Skirt', 'cloth_type T-shirt', 'cloth_type Tops', 'cloth_type Trouser',
-            'garment_fitting Baggy', 'garment_fitting Classic Fit', 'garment_fitting Other', 'garment_fitting Regular Fit', 'garment_fitting Slim_Fit'
+            'garment_fitting Baggy', 'garment_fitting Classic_Fit', 'garment_fitting Other', 'garment_fitting Regular_Fit', 'garment_fitting Slim_Fit'
         ]
 
 

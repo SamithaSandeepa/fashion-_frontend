@@ -63,7 +63,7 @@ export const Filter = () => {
             <h3>Price</h3>
             <div className="price-input-container">
               <label htmlFor="below-200">
-                Below $200
+                Below Rs200
                 <input
                   checked={state.filters.price.find((price) =>
                     price.min === 0 ? true : false
@@ -80,7 +80,7 @@ export const Filter = () => {
               </label>
 
               <label htmlFor="201-999">
-                $201 - $999
+                Rs201 - Rs999
                 <input
                   checked={state.filters.price.find((price) =>
                     price.min === 201 ? true : false
@@ -97,7 +97,7 @@ export const Filter = () => {
               </label>
 
               <label htmlFor="1000-1999">
-                $1000 - $1999
+                Rs1000 - Rs1999
                 <input
                   checked={state.filters.price.find((price) =>
                     price.min === 1000 ? true : false
@@ -114,7 +114,7 @@ export const Filter = () => {
               </label>
 
               <label htmlFor="above 2000">
-                Over $2000
+                Over Rs2000
                 <input
                   checked={state.filters.price.find((price) =>
                     price.min === 2000 ? true : false
