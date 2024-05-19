@@ -7,3 +7,10 @@
     flex-grow: 1;
   }
 }
+/* ProductListing.css */
+.separator {
+  border: 0;
+  height: 1px;
+  background: #ccc;
+  margin: 20px 0;
+}

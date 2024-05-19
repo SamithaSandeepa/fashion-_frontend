@@ -14,13 +14,10 @@ function ImageSearch() {
   const [allProducts, setAllProducts] = useState([]); // State to store all products
   const [filteredProducts, setFilteredProducts] = useState([]);
 
-  console.log(croppedImages);
-
   const handleImageChange = (event) => {
     const file = event.target.files[0];
     if (file) {
       setImageSrc(URL.createObjectURL(file));
-      // If you want to start scanning right after image selection, call `handleSubmit()`
       handleSubmit(event);
     }
   };
@@ -62,15 +59,28 @@ function ImageSearch() {
   };
 
   const selectImage = (index, label) => {
-    setSelectedImageIndex(index);
-    console.log("Selected Image:", index, label);
-    const matchingProducts = allProducts.filter((product) =>
-      product.image_search_label.toLowerCase().includes(label.toLowerCase())
-    );
-    console.log(label, "Matching Products:", matchingProducts);
-    setFilteredProducts(matchingProducts);
+    setSelectedImageIndex(index); // Mark the clicked image as selected
+
+    // Log the label and allProducts to diagnose any issues
+    console.log("Selected Label:", label);
+    console.log("All Products:", allProducts);
+
+    // Filter products based on the image_search_label matching the clicked label
+    const matchingProducts = allProducts.filter((product) => {
+      // Normalize both label and product.image_search_label to lowercase and trim whitespace
+      const normalizedLabel = label.toLowerCase().trim();
+      const productLabel = product.image_search_label.toLowerCase().trim();
+
+      // Log the comparison for debugging
+      console.log("Comparing:", normalizedLabel, "with", productLabel);
+
+      return productLabel.includes(normalizedLabel);
+    });
+
+    // Log the matching products for debugging
     console.log("Matching Products:", matchingProducts);
-    setIsLoading(false); // Assume image processing is done and loading is complete
+
+    setFilteredProducts(matchingProducts); // Update state with filtered products
   };
 
   useEffect(() => {
@@ -81,7 +91,6 @@ function ImageSearch() {
         );
         if (response.ok) {
           const products = await response.json();
-          console.log("Products:", products);
           setAllProducts(products); // Set the products in state, pass them to components, etc.
           // Set the products in state, pass them to components, etc.
         } else {
@@ -163,7 +172,14 @@ function ImageSearch() {
       </div>
       <div className="product-listing-container">
         <h2>Matching Products</h2>
-        <ProductListing products={filteredProducts} />
+        {filteredProducts.length === 0 ? (
+          <>
+            <p>No matching products found. Showing all products:</p>
+            <ProductListing products={allProducts} />
+          </>
+        ) : (
+          <ProductListing products={filteredProducts} />
+        )}
       </div>
     </>
   );
