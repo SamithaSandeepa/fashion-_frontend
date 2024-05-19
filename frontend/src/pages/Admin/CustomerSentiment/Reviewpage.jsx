@@ -94,32 +94,87 @@ export const Reviewpage = () => {
     return <div>Loading...</div>;
   }
 
+  // return (
+  //   <div className="review-page">
+  //     <h1>{reviewType} review page</h1>
+  //     <p>Product ID: {id}</p>
+  //     {/* Iterate through comments and display them */}
+  //     <ul>
+  //       {comments.map((comment, index) => (
+  //         <button key={index} onClick={()=>fetchAndAnalyzeComment(comment)}>{comment}</button>
+  //       ))}
+  //     </ul>
+  //     {
+  //       show && (
+  //         <div className="modal-overlay" onClick={()=>setShow(false)}>
+  //         <div className="modal-content">
+  //           <div className="modal-header">
+  //             <h4 className="modal-title">Analysis Details</h4>
+  //             <button onClick={()=>setShow(false)} className="close-button">&times;</button>
+  //           </div>
+  //           <div className="modal-body">
+  //             <button onClick={()=>window.open('http://localhost:8000/media/'+analysis, '_blank')}>show Result</button>
+  //           </div>
+  //         </div>
+  //       </div>
+  //       )
+  //     }
+      
+  //   </div>
+  // );
   return (
-    <div className="review-page">
-      <h1>{reviewType} review page</h1>
-      <p>Product ID: {id}</p>
-      {/* Iterate through comments and display them */}
-      <ul>
-        {comments.map((comment, index) => (
-          <button key={index} onClick={()=>fetchAndAnalyzeComment(comment)}>{comment}</button>
-        ))}
-      </ul>
-      {
-        show && (
-          <div className="modal-overlay" onClick={()=>setShow(false)}>
-          <div className="modal-content">
-            <div className="modal-header">
-              <h4 className="modal-title">Analysis Details</h4>
-              <button onClick={()=>setShow(false)} className="close-button">&times;</button>
-            </div>
-            <div className="modal-body">
-              <button onClick={()=>window.open('http://localhost:8000/media/'+analysis, '_blank')}>show Result</button>
+    <div className="review-page-container">
+      <div className="sidebar">
+        <div className="sidebar-header">
+          <h2> ADMIN </h2>
+        </div>
+        <ul className="sidebar-list">
+          <li className="sidebar-item">Dashboard</li>
+          <li className="sidebar-item">Users</li>
+          <li className="sidebar-item">Colors</li>
+          <li className="sidebar-item">Prints</li>
+          <li className="sidebar-item">Styles</li>
+          <li className="sidebar-subheader">Current Trends</li>
+          <li className="sidebar-item">T Shirts</li>
+          <li className="sidebar-item">Dresses</li>
+          <li className="sidebar-item">Skirts</li>
+          <li className="sidebar-subheader">Service</li>
+          <li className="sidebar-item">System Health</li>
+          <li className="sidebar-item">Logs</li>
+          <li className="sidebar-item">Settings</li>
+          <li className="sidebar-subheader">User</li>
+          <li className="sidebar-item">Profile</li>
+          <li className="sidebar-item">Logout</li>
+        </ul>
+      </div>
+      <div className="review-page-content">
+        {/* <h1>{reviewType} review page</h1> */}
+        {/* <h1 style={{ textAlign: 'center' }}>{reviewType} review page</h1>
+        <p style={{ textAlign: 'center' }}>Product ID: {id}</p> */}
+        <h1 style={{ textAlign: 'center', marginBottom: '20px' }}>{reviewType} review page</h1>
+        <p style={{ textAlign: 'center', marginBottom: '20px' }}>Product ID: {id}</p>
+        
+        <ul>
+          {comments.map((comment, index) => (
+            // <button key={index} onClick={() => fetchAndAnalyzeComment(comment)}>{comment}</button>
+            <button key={index} onClick={() => fetchAndAnalyzeComment(comment)} style={{ fontWeight: 'bold', fontSize: '16px' }}> {comment}</button>
+          ))}
+        </ul>
+        {show && (
+          <div className="modal-overlay" onClick={() => setShow(false)}>
+            <div className="modal-content">
+              <div className="modal-header">
+                <h4 className="modal-title">Analysis Details</h4>
+                <button onClick={() => setShow(false)} className="close-button">&times;</button>
+              </div>
+              <div className="modal-body">
+                <button onClick={() => window.open('http://localhost:8000/media/' + analysis, '_blank')}>show Result</button>
+              </div>
             </div>
           </div>
-        </div>
-        )
-      }
-      
+        )}
+      </div>
     </div>
   );
 };
+
