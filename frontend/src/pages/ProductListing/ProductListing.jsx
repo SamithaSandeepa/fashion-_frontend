@@ -195,7 +195,7 @@ export const ProductListing = ({ products: propProducts }) => {
     <Loader loading={loading} />
   ) : (
     <div className="page-container">
-      {/* <Filter className="filters" /> */}
+      <Filter className="filters" />
       <div className="products-container">
         <ProductListingSection products={recommendedProducts} />
         {recommendedProducts.length > 0 && <hr className="separator" />}
