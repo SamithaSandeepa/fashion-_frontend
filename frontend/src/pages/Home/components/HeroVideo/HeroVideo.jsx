@@ -8,7 +8,15 @@ export const HeroVideo = () => {
 
   const handleShopNow = async () => {
     setIsLoading(true);
-    navigate("/product-listing");
+
+    const token = localStorage.getItem("token");
+
+    if (!token) {
+      navigate("/login"); // Navigate to the login page if the user is not logged in
+    } else {
+      navigate("/product-listing");
+    }
+
     setIsLoading(false);
   };
 
