@@ -48,7 +48,7 @@ export const AddProduct = () => {
       const data = await response.json();
       console.log(data);
       console.log("Product added successfully:", data);
-
+      alert("Product added successfully!");
       // Clear the form inputs
       setFormData(initialFormData);
     } catch (error) {
