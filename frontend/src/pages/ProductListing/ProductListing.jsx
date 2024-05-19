@@ -32,6 +32,7 @@ export const ProductListing = ({ products: propProducts }) => {
         );
         const productsData = await productsResponse.json();
         setProducts(productsData);
+        console.log("productsData", productsData);
       } catch (error) {
         console.error("Error fetching products:", error);
       }
@@ -145,26 +146,40 @@ export const ProductListing = ({ products: propProducts }) => {
   }, [propProducts]);
 
   useEffect(() => {
-    if (recommendations.length > 0 && products.length > 0) {
-      const recProducts = products.filter((product) =>
-        recommendations.some((recommendation) => {
-          const [column, value] = recommendation.split(" ");
-          if (product.gender === gender) {
-            switch (column) {
-              case "fashion_style":
-                return product.fashion_style === value;
-              case "fashion_brand":
-                return product.fashion_brand === value;
-              case "cloth_type":
-                return product.cloth_type === value;
-              case "garment_fitting":
-                return product.garment_fitting === value;
-              default:
-                return false;
+    if (products.length > 0) {
+      let recProducts = [];
+
+      if (recommendations.length > 0) {
+        recProducts = products.filter((product) =>
+          recommendations.some((recommendation) => {
+            const [column, value] = recommendation.split(" ");
+            if (product.gender === gender) {
+              switch (column) {
+                case "fashion_style":
+                  return product.fashion_style === value;
+                case "fashion_brand":
+                  return product.fashion_brand === value;
+                case "cloth_type":
+                  return product.cloth_type === value;
+                case "garment_fitting":
+                  return product.garment_fitting === value;
+                default:
+                  return false;
+              }
             }
-          }
-        })
-      );
+            return false;
+          })
+        );
+      }
+
+      if (recProducts.length === 0) {
+        // If no recommended products are found, or if recommendations are empty,
+        // select 6 random products filtered by gender
+        const genderFilteredProducts = products.filter(
+          (product) => product.gender === gender
+        );
+        recProducts = shuffleArray(genderFilteredProducts).slice(0, 6);
+      }
 
       const othProducts = products.filter(
         (product) => !recProducts.includes(product)
@@ -172,7 +187,7 @@ export const ProductListing = ({ products: propProducts }) => {
 
       setRecommendedProducts(shuffleArray(recProducts));
       setOtherProducts(shuffleArray(othProducts));
-      setLoading(false);
+      setLoading(false); // Stop loading after processing data
     }
   }, [recommendations, products, gender]);
 
