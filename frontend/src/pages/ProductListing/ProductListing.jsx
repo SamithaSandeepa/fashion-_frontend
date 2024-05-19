@@ -3,6 +3,7 @@ import { useLocation } from "react-router-dom";
 import { Filter } from "./components/Filter/Filter";
 import { ProductListingSection } from "./components/ProductListingSection/ProductListingSection";
 import "./ProductListing.css";
+import { Loader } from "../../components/Loader/Loader";
 
 // Utility function to shuffle an array
 const shuffleArray = (array) => {
@@ -171,11 +172,12 @@ export const ProductListing = ({ products: propProducts }) => {
 
       setRecommendedProducts(shuffleArray(recProducts));
       setOtherProducts(shuffleArray(othProducts));
+      setLoading(false);
     }
   }, [recommendations, products, gender]);
 
   return loading ? (
-    <div>Loading...</div>
+    <Loader loading={loading} />
   ) : (
     <div className="page-container">
       <Filter className="filters" />
